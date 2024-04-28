@@ -3,13 +3,41 @@
 @tailwind utilities;
 
 :root {
+	--surface: hsl(0, 0%, 12%);
+	--secondary-surface: hsl(240, 4%, 16%);
+	--text: hsl(0, 0%, 90%);
+	--stroke: hsl(0, 0%, 32%);
+	--buttery-yellow: hsl(48, 97%, 77%);
+	--soft-teal: hsl(151, 24%, 61%);
+	--warm-coral: hsl(0, 91%, 71%);
+	--light-sky-blue: hsl(195, 47%, 70%);
 }
 
-@media (prefers-color-scheme: dark) {
+::selection {
+	background-color: var(--text);
+	color: var(--surface);
+}
+
+html {
+	scrollbar-width: thin;
+}
+
+body {
+	background-color: var(--surface);
+	color: var(--text);
+	color-scheme: dark;
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+	.img-pixelated {
+		image-rendering: pixelated;
+	}
+
+	.bg-grid {
+		background-size: 100px 100px;
+		background-image: url(/assets/grid.png);
+		background-position-y: -9px;
+		-webkit-mask-image: linear-gradient(to bottom, transparent, 5%, white, 90%, transparent);
+		mask-image: linear-gradient(to bottom, transparent, 5%, white, 90%, transparent);
+	}
 }

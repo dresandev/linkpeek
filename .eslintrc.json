@@ -1,8 +1,6 @@
 {
-  "extends": "next/core-web-vitals",
-  "rules": {
-    "semi": ["error", "never"],
-    "@next/next/no-img-element": "off",
-    "quotes": ["error", "single"]
-  }
+	"extends": ["eslint-config-prettier", "next/core-web-vitals"],
+	"rules": {
+		"@next/next/no-img-element": "off"
+	}
 }

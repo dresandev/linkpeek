@@ -3,14 +3,15 @@
 @tailwind utilities;
 
 :root {
-	--surface: hsl(0, 0%, 12%);
-	--secondary-surface: hsl(240, 4%, 16%);
-	--text: hsl(0, 0%, 90%);
-	--stroke: hsl(0, 0%, 32%);
-	--buttery-yellow: hsl(48, 97%, 77%);
-	--soft-teal: hsl(151, 24%, 61%);
-	--warm-coral: hsl(0, 91%, 71%);
-	--light-sky-blue: hsl(195, 47%, 70%);
+	--surface: hsl(0, 0%, 44%);
+	--surface: hsl(0 0% 12%);
+	--secondary-surface: hsl(240 4% 16%);
+	--text: hsl(0 0% 90%);
+	--stroke: hsl(0 0% 32%);
+	--buttery-yellow: hsl(48 97% 77%);
+	--soft-teal: hsl(151 24% 61%);
+	--warm-coral: hsl(0 91% 71%);
+	--light-sky-blue: hsl(195 47% 70%);
 }
 
 ::selection {
@@ -18,7 +19,7 @@
 	color: var(--surface);
 }
 
-html {
+* {
 	scrollbar-width: thin;
 }
 

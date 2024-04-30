@@ -9,7 +9,7 @@ export default function Home() {
 		<>
 			<LuckyLink />
 			<Header />
-			<main className="mx-auto max-w-[1472px]">
+			<main className="mx-auto max-w-[1472px] px-5">
 				<TagList />
 				<LinkGrid />
 			</main>

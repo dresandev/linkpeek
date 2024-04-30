@@ -20,7 +20,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="es">
-			<body className={`${plus_jakarta_sans.className} px-5`}>{children}</body>
+			<body className={plus_jakarta_sans.className}>{children}</body>
 		</html>
 	)
 }

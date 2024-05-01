@@ -1,4 +1,4 @@
-import { LinkCard } from "./link-card"
+import { LinkCard } from "~/components/link-card"
 
 const LINKS = [
 	{

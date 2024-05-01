@@ -1,5 +1,5 @@
-import { Clover, Stars, ThumbUp } from "./svg"
-import { SecretKeyForm } from "./secret-key-form"
+import { Clover, Stars, ThumbUp } from "~/components/svg"
+import { AddLink } from "~/components/AddLink"
 
 export const Header = () => {
 	return (
@@ -22,12 +22,11 @@ export const Header = () => {
 				</span>
 				, más facil que la tabla del 0
 			</h1>
-			<p className="mx-auto max-w-[760px] text-center text-lg md:text-xl">
+			<p className="mx-auto max-w-[760px] text-center text-lg md:text-xl mb-10">
 				Gestiona tus links de manera rapida, simple, sencilla, amigable, honesta, correcta,
 				apasionada, creible, fiable, responsable y sobre todo divergente
 			</p>
-
-			<SecretKeyForm />
+			<AddLink />
 		</header>
 	)
 }

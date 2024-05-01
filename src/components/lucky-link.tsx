@@ -1,4 +1,4 @@
-import { ArrowRight } from "./svg"
+import { ArrowRight } from "~/components/svg"
 
 export const LuckyLink = () => {
 	return (

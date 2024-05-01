@@ -1,20 +1,20 @@
 "use client"
 
-import { PencilIcon } from "~/components/svg"
+import { InfoCircle } from "~/components/svg"
 import { Button } from "~/components/ui/button"
 import { Input } from "~/components/ui/input"
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "~/components/ui/dialog"
 
-export const UpdateLinkDialog = () => {
+export const AddLinkDialog = () => {
 	return (
 		<Dialog>
 			<DialogTrigger asChild>
-				<button className="relative z-10 flex w-full items-center gap-x-2 rounded-sm px-2 py-1.5 hover:bg-[hsl(0_0%_70%/0.1)]">
-					<PencilIcon className="size-4" /> Editar
-				</button>
+				<div className="mx-auto max-w-[350px] rounded-lg bg-funny-gradient p-2">
+					<Button className="w-full">Agregar link</Button>
+				</div>
 			</DialogTrigger>
 			<DialogContent>
-				<DialogTitle>Editar Link</DialogTitle>
+				<DialogTitle>Agregar Link</DialogTitle>
 				<form className="flex flex-col gap-y-4 text-sm">
 					<div>
 						<label className="inline-block pb-2 font-medium after:content-['*']" htmlFor="link-url">
@@ -26,7 +26,6 @@ export const UpdateLinkDialog = () => {
 							className="w-full"
 							type="text"
 							required
-							value="https://dresan.is-a.dev"
 							name="link-url"
 						/>
 					</div>
@@ -35,8 +34,8 @@ export const UpdateLinkDialog = () => {
 							Título
 						</label>
 						<Input
-							id="link-title"
 							variant="outlined"
+							id="link-title"
 							className="w-full"
 							type="text"
 							name="link-title"
@@ -53,6 +52,12 @@ export const UpdateLinkDialog = () => {
 						></textarea>
 					</div>
 
+					<div className="flex gap-x-2">
+						<InfoCircle className="flex-shrink-0" />
+						<p className="text-sm">
+							Si no se provee titulo o descripción se usara la información de la página.
+						</p>
+					</div>
 					<Button variant="contained" type="submit">
 						Actualizar
 					</Button>

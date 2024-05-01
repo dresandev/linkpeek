@@ -1,4 +1,4 @@
-import { UpdateLinkDialog } from "./dialogs/update-link-dialog"
+import { LinkOptionsPopover } from "~/components/link-options-popover"
 import { ArrowRight } from "~/components/svg"
 
 interface Props {
@@ -30,10 +30,11 @@ export const LinkCard: React.FC<Props> = ({ url, ogImage, title, description }) 
 			<div className="p-5 pt-3">
 				<div className="flex justify-between pb-2">
 					<h3 className="flex w-fit items-center gap-x-1 text-lg font-medium leading-tight">
-						{title}{" "}
+						{title}
 						<ArrowRight className="size-4 flex-shrink-0 opacity-0 transition-opacity duration-300" />
 					</h3>
-					<UpdateLinkDialog />
+					<LinkOptionsPopover />
+					{/* <UpdateLinkDialog /> */}
 				</div>
 				<p className="text-[14px]">{description}</p>
 			</div>

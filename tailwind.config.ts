@@ -32,12 +32,17 @@ const config: Config = {
         "hide-dialog": {
           to: { opacity: '0' },
         },
+        "enter-popover": {
+          from: { opacity: '0', transform: 'translateY(-25%) scale(0.95)' },
+          to: { opacity: '1', transform: 'translateY(0) scale(1)' },
+        }
       },
       animation: {
         "fade-in": 'fade-in 300ms cubic-bezier(0.16, 1, 0.3, 1)',
         "fade-out": 'fade-out 300ms cubic-bezier(0.16, 1, 0.3, 1)',
-        "enter-dialog": 'enter-dialog 300ms cubic-bezier(0.16, 1, 0.3, 1)',
-        "hide-dialog": 'hide-dialog 300ms cubic-bezier(0.16, 1, 0.3, 1)',
+        "enter-dialog": 'enter-dialog 150ms cubic-bezier(0.16, 1, 0.3, 1)',
+        "hide-dialog": 'hide-dialog 150ms cubic-bezier(0.16, 1, 0.3, 1)',
+        "enter-popover": 'enter-popover 150ms cubic-bezier(0.16, 1, 0.3, 1)',
       },
       backgroundImage: {
         "sparkles-pattern": "url(/assets/sparkles.png)",

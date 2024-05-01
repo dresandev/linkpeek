@@ -1,4 +1,4 @@
-import { TagPill } from "./tag-pill"
+import { TagPill } from "~/components/tag-pill"
 
 const TAGS = [
 	{ label: "Todo", isSelected: true },

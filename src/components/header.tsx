@@ -3,7 +3,7 @@ import { AddLink } from "~/components/AddLink"
 
 export const Header = () => {
 	return (
-		<header className="relative px-5 pb-10 pt-24 md:pt-40">
+		<header className="relative px-5 pb-10 pt-24 md:pt-32">
 			<div className="bg-grid absolute inset-0 -bottom-24 -z-10"></div>
 			<h1 className="mx-auto mb-4 max-w-[760px] text-center text-[40px] font-bold md:text-[60px]">
 				<span className="relative rounded-full text-buttery-yellow hover:bg-[hsl(48_97%_77%/0.1)]">

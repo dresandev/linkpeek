@@ -53,7 +53,7 @@ const LINKS = [
 
 export const LinkGrid = () => {
 	return (
-		<section className="mb-40 mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:md:grid-cols-4 lg:gap-6">
+		<section className="mb-40 mt-9 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:md:grid-cols-4 lg:gap-6">
 			{LINKS.map((link) => (
 				<LinkCard key={link.url} {...link} />
 			))}

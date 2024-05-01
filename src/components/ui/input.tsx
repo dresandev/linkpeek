@@ -12,7 +12,7 @@ const inputVariants = cva("py-2 focus:outline-none", {
 			outlined:
 				"rounded-[4px] border border-stroke bg-transparent px-3 focus:border-[hsl(0_0%_44%)]",
 			contained:
-				"rounded-md border-2 border-[hsl(240,4%,39%)] bg-secondary-surface px-4  text-base placeholder:text-[hsl(219_8%_60%)] focus:border-[hsl(240,4%,46%)]",
+				"rounded-md border-2 border-[hsl(240,4%,39%)] bg-secondary-surface px-4 text-base placeholder:text-[hsl(219_8%_60%)] focus:border-[hsl(240,4%,46%)]",
 		},
 	},
 	defaultVariants: {

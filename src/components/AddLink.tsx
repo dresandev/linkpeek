@@ -1,8 +1,8 @@
-import { SecretKeyForm } from "~/components/secret-key-form"
 import { AddLinkDialog } from "~/components/dialogs/add-link-dialog"
+import { LoginButton } from "~/components/login-button"
 
 export const AddLink = () => {
-	const isValidSecretKey = true
+	const isValidUser = true
 
-	return isValidSecretKey ? <AddLinkDialog /> : <SecretKeyForm />
+	return isValidUser ? <AddLinkDialog /> : <LoginButton />
 }

@@ -59,7 +59,7 @@ export const AddLinkDialog = () => {
 						</p>
 					</div>
 					<Button variant="contained" type="submit">
-						Actualizar
+						Agregar
 					</Button>
 				</form>
 			</DialogContent>

@@ -4,7 +4,7 @@ import { AddLink } from "~/components/AddLink"
 export const Header = () => {
 	return (
 		<header className="relative px-5 pb-10 pt-24 md:pt-32">
-			<div className="bg-grid absolute inset-0 -bottom-24 -z-10"></div>
+			<div className="bg-grid absolute inset-0 -bottom-32 -z-10"></div>
 			<h1 className="mx-auto mb-4 max-w-[760px] text-center text-[40px] font-bold md:text-[60px]">
 				<span className="relative rounded-full text-buttery-yellow hover:bg-[hsl(48_97%_77%/0.1)]">
 					Bueno
@@ -22,7 +22,7 @@ export const Header = () => {
 				</span>
 				, más facil que la tabla del 0
 			</h1>
-			<p className="mx-auto max-w-[760px] text-center text-lg md:text-xl mb-10">
+			<p className="mx-auto mb-10 max-w-[760px] text-center text-lg md:text-xl">
 				Gestiona tus links de manera rapida, simple, sencilla, amigable, honesta, correcta,
 				apasionada, creible, fiable, responsable y sobre todo divergente
 			</p>

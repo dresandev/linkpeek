@@ -1,61 +1,23 @@
+import { getLinks } from "~/actions/links"
 import { LinkCard } from "~/components/link-card"
+import { NoItems } from "~/components/svg"
 
-const LINKS = [
-	{
-		url: "https://dresan.is-a.dev",
-		title: "Dresan Portfolio",
-		description: "Gestiona tus links de manera rapida, simple, sencilla, amigable.",
-		ogImage: "/assets/link-og-image.png",
-	},
-	{
-		url: "https://dresan.is-a.dev",
-		title: "Dresan Portfolio",
-		description: "Gestiona tus links de manera rapida, simple, sencilla, amigable.",
-		ogImage: "/assets/link-og-image.png",
-	},
-	{
-		url: "https://dresan.is-a.dev",
-		title: "Dresan Portfolio",
-		description: "Gestiona tus links de manera rapida, simple, sencilla, amigable.",
-		ogImage: "/assets/link-og-image.png",
-	},
-	{
-		url: "https://dresan.is-a.dev",
-		title: "Dresan Portfolio",
-		description: "Gestiona tus links de manera rapida, simple, sencilla, amigable.",
-		ogImage: "/assets/link-og-image.png",
-	},
-	{
-		url: "https://dresan.is-a.dev",
-		title: "Dresan Portfolio",
-		description: "Gestiona tus links de manera rapida, simple, sencilla, amigable.",
-		ogImage: "/assets/link-og-image.png",
-	},
-	{
-		url: "https://dresan.is-a.dev",
-		title: "Dresan Portfolio",
-		description: "Gestiona tus links de manera rapida, simple, sencilla, amigable.",
-		ogImage: "/assets/link-og-image.png",
-	},
-	{
-		url: "https://dresan.is-a.dev",
-		title: "Dresan Portfolio",
-		description: "Gestiona tus links de manera rapida, simple, sencilla, amigable.",
-		ogImage: "/assets/link-og-image.png",
-	},
-	{
-		url: "https://dresan.is-a.dev",
-		title: "Dresan Portfolio",
-		description: "Gestiona tus links de manera rapida, simple, sencilla, amigable.",
-		ogImage: "/assets/link-og-image.png",
-	},
-]
+export const LinkGrid = async () => {
+	const links = await getLinks()
 
-export const LinkGrid = () => {
+	if (!links.length) {
+		return (
+			<>
+				<NoItems className="mx-auto mb-4 mt-36" />
+				<p className="mb-36 text-center text-xl">No tienes links guardados</p>
+			</>
+		)
+	}
+
 	return (
-		<section className="mb-40 mt-9 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:md:grid-cols-4 lg:gap-6">
-			{LINKS.map((link) => (
-				<LinkCard key={link.url} {...link} />
+		<section className="mb-40 mt-9 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:md:grid-cols-4">
+			{links.map((link) => (
+				<LinkCard key={link.id} {...link} />
 			))}
 		</section>
 	)

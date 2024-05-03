@@ -1,5 +1,5 @@
 import { Clover, Stars, ThumbUp } from "~/components/svg"
-import { AddLink } from "~/components/AddLink"
+import { AddLink } from "~/components/add-link"
 
 export const Header = () => {
 	return (

@@ -8,8 +8,17 @@ datasource db {
 }
 
 model Link {
-  id          String  @id @default(cuid())
-  url         String
-  title       String?
-  description String?
+  id   Int    @id @default(autoincrement())
+  url  String
+  tags Tag[]
+
+  @@map("link")
+}
+
+model Tag {
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+  links Link[]
+
+  @@map("tag")
 }

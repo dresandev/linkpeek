@@ -17,7 +17,7 @@ export const LinkOptionsPopover = () => (
 			</div>
 
 			<UpdateLinkDialog />
-			<button className="flex w-full items-center gap-x-2 rounded-sm px-2 py-1.5 hover:bg-[hsl(0_0%_70%/0.1)]">
+			<button className="flex w-full items-center gap-x-2 rounded-sm px-2 py-1.5 text-red-400 hover:bg-[hsl(0_0%_70%/0.1)]">
 				<DeleteIcon className="size-4" /> Eliminar
 			</button>
 		</PopoverContent>

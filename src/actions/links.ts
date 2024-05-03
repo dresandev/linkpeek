@@ -2,18 +2,32 @@
 
 import { db } from '~/lib/db'
 
-export const addLink = ({ url }: { url: string }) => {
-  db.link.create({
+export const addLink = async ({ url, title, description, }: { url: string, title?: string, description?: string }) => {
+  await db.link.create({
     data: {
-      url
+      url,
+      title,
+      description
     }
   })
 }
 
-export const updateLink = () => {
-
+export const updateLink = async (id: string, { url, title, description, }: { url: string, title?: string, description?: string }) => {
+  await db.link.update({
+    where: { id },
+    data: {
+      url,
+      title,
+      description
+    }
+  })
 }
 
-export const deleteLink = () => {
+export const getLinks = async () => {
+  const links = await db.link.findMany()
+  return links
+}
 
+export const deleteLink = async (id: string,) => {
+  await db.link.delete({ where: { id } })
 }

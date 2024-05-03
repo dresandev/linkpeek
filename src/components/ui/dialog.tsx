@@ -34,7 +34,7 @@ export const DialogContent = forwardRef<
 		<DialogPrimitive.Content
 			ref={ref}
 			className={cn(
-				"fixed inset-0 m-auto h-max max-h-[85vh] w-[90vw] max-w-[450px] rounded-[6px] bg-secondary-surface p-[25px] shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] focus:outline-none data-[state=closed]:animate-hide-dialog data-[state=open]:animate-enter-dialog",
+				"fixed inset-0 m-auto h-max max-h-[85vh] w-[90vw] max-w-[450px] rounded-[6px] bg-secondary-surface p-[25px] focus:outline-none data-[state=closed]:animate-hide-dialog data-[state=open]:animate-enter-dialog",
 				className
 			)}
 			{...props}

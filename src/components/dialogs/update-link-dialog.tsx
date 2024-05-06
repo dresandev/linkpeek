@@ -5,7 +5,11 @@ import { Button } from "~/components/ui/button"
 import { Input } from "~/components/ui/input"
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "~/components/ui/dialog"
 
-export const UpdateLinkDialog = () => {
+interface Props {
+	url: string
+}
+
+export const UpdateLinkDialog: React.FC<Props> = ({ url }) => {
 	return (
 		<Dialog>
 			<DialogTrigger asChild>
@@ -17,40 +21,18 @@ export const UpdateLinkDialog = () => {
 				<DialogTitle>Editar Link</DialogTitle>
 				<form className="flex flex-col gap-y-4 text-sm">
 					<div>
-						<label className="inline-block pb-2 font-medium after:content-['*']" htmlFor="link-url">
+						<label className="inline-block pb-2 font-medium" htmlFor="link-url">
 							URL
 						</label>
 						<Input
 							id="link-url"
-							variant="outlined"
-							className="w-full"
+							name="link-url"
 							type="text"
 							required
-							value="https://dresan.is-a.dev"
-							name="link-url"
-						/>
-					</div>
-					<div>
-						<label className="inline-block pb-2 font-medium" htmlFor="link-title">
-							Título
-						</label>
-						<Input
-							id="link-title"
+							defaultValue={url}
 							variant="outlined"
 							className="w-full"
-							type="text"
-							name="link-title"
 						/>
-					</div>
-					<div>
-						<label className="inline-block pb-2 font-medium" htmlFor="link-description">
-							Descripción
-						</label>
-						<textarea
-							id="link-description"
-							className="h-28 w-full resize-none rounded-[4px] border border-stroke bg-transparent px-3 py-2 focus:border-[hsl(0_0%_44%)] focus:outline-none"
-							name="link-description"
-						></textarea>
 					</div>
 
 					<Button variant="contained" type="submit">

@@ -8,7 +8,7 @@ export const LinkGrid = async () => {
 	if (!links.length) {
 		return (
 			<>
-				<NoItems className="mx-auto mb-4 mt-36" />
+				<NoItems className="mx-auto mb-4 mt-36 w-full" />
 				<p className="mb-36 text-center text-xl">No tienes links guardados</p>
 			</>
 		)

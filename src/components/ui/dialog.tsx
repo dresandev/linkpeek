@@ -2,8 +2,8 @@
 
 import { forwardRef } from "react"
 import * as DialogPrimitive from "@radix-ui/react-dialog"
+import { cn } from "~/lib/utils"
 import { X } from "~/components/svg"
-import { cn } from "~/utils"
 
 export const Dialog = DialogPrimitive.Root
 export const DialogTrigger = DialogPrimitive.Trigger

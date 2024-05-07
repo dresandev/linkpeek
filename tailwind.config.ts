@@ -36,7 +36,7 @@ const config: Config = {
         "enter-popover": {
           from: { opacity: '0', transform: 'translateY(-25%) scale(0.95)' },
           to: { opacity: '1', transform: 'translateY(0) scale(1)' },
-        }
+        },
       },
       animation: {
         "fade-in": 'fade-in 300ms cubic-bezier(0.16, 1, 0.3, 1)',

@@ -38,7 +38,23 @@ body {
 		background-size: 100px 100px;
 		background-image: url(/assets/grid.png);
 		background-position-y: -9px;
-		-webkit-mask-image: linear-gradient(to bottom, transparent, 5%, white, 90%, transparent);
-		mask-image: linear-gradient(to bottom, transparent, 5%, white, 90%, transparent);
+		-webkit-mask-image: linear-gradient(
+			to bottom,
+			transparent,
+			5%,
+			hsl(0 0% 100%),
+			90%,
+			transparent
+		);
+		mask-image: linear-gradient(to bottom, transparent, 5%, hsl(0 0% 100%), 90%, transparent);
+	}
+
+	.no-scrollbar::-webkit-scrollbar {
+		display: none;
+	}
+
+	.no-scrollbar {
+		-ms-overflow-style: none;
+		scrollbar-width: none;
 	}
 }

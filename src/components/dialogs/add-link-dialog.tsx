@@ -11,9 +11,9 @@ export const AddLinkDialog = () => {
 	return (
 		<Dialog open={open} onOpenChange={setOpen}>
 			<DialogTrigger asChild>
-				<div className="mx-auto max-w-[350px] rounded-lg bg-funny-gradient p-2">
-					<Button className="w-full">Agregar link</Button>
-				</div>
+				<Button className="relative mx-auto block w-full max-w-[350px] before:absolute before:inset-[-10px] before:-z-10 before:rounded-lg before:bg-funny-gradient">
+					Agregar link
+				</Button>
 			</DialogTrigger>
 			<DialogContent>
 				<DialogTitle>Agregar Link</DialogTitle>

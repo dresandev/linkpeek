@@ -8,12 +8,14 @@ datasource db {
 }
 
 model Link {
-  id          String  @id @default(cuid())
+  id          String   @id @default(cuid())
   url         String
   ogImageUrl  String?
   title       String
   description String?
   tags        Tag[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
   @@map("link")
 }

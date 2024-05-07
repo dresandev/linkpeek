@@ -27,7 +27,7 @@ export const LinkCard: React.FC<Props> = ({ id, url, ogImageUrl, title, descript
 			{ogImageUrl ? (
 				<picture className="block overflow-hidden">
 					<img
-						className="aspect-video w-full object-cover transition-transform duration-300"
+						className="aspect-video w-full object-cover object-center transition-transform duration-300"
 						src={ogImageUrl}
 						alt=""
 						width={358}
@@ -39,8 +39,8 @@ export const LinkCard: React.FC<Props> = ({ id, url, ogImageUrl, title, descript
 			)}
 			<div className="p-5 pt-3">
 				<div className="flex items-start justify-between pb-2">
-					<h3 className="text-lg font-medium leading-tight ">{title}</h3>
-					<LinkOptionsPopover linkId={id} linkUrl={url} />
+					<h3 className="text-lg font-medium leading-tight">{title}</h3>
+					<LinkOptionsPopover id={id} url={url} />
 				</div>
 				<p className="line-clamp-3 text-sm">{description}</p>
 			</div>

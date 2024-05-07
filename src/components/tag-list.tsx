@@ -10,7 +10,7 @@ const TAGS = [
 
 export const TagList = () => {
 	return (
-		<div className="-mx-5 flex gap-x-4 overflow-x-auto px-5 py-2">
+		<div className="-mx-5 flex gap-x-4 overflow-x-auto px-5 py-2 no-scrollbar">
 			{TAGS.map((tag) => (
 				<TagPill key={tag.label} {...tag} />
 			))}

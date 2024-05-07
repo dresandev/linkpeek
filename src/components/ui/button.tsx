@@ -7,7 +7,7 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const buttonVariants = cva(
-	"rounded-md transition-[background-color] disabled:opacity-75 disabled:pointer-events-none font-medium",
+	"rounded-md transition-[background-color] disabled:opacity-75 disabled:pointer-events-none font-medium focus-visible:outline-offset-2",
 	{
 		variants: {
 			variant: {

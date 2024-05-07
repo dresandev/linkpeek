@@ -1,18 +1,24 @@
 "use client"
 
-import { addLink } from "~/actions/links"
+import { toast } from "sonner"
+import { updateLink } from "~/actions/links"
 import { useOnLinkFormSubmit } from "~/hooks/use-on-link-form-submit"
-import { Input } from "~/components/ui/input"
 import { Button } from "~/components/ui/button"
+import { Input } from "~/components/ui/input"
 import { CircleLoader } from "~/components/loaders/circle-loader"
 
 interface Props {
+	id: string
+	url: string
 	afterSubmit: () => void
 }
 
-export const AddLinkForm: React.FC<Props> = ({ afterSubmit }) => {
+export const UpdateLinkForm: React.FC<Props> = ({ id, url, afterSubmit }) => {
 	const { handleSubmit, isPending } = useOnLinkFormSubmit({
-		action: async (link) => await addLink(link),
+		action: async (link) => {
+			await updateLink(id, link)
+			toast("Link actualizado correctamente")
+		},
 		afterSubmit,
 	})
 
@@ -28,13 +34,14 @@ export const AddLinkForm: React.FC<Props> = ({ afterSubmit }) => {
 					name="url"
 					type="url"
 					required
+					defaultValue={url}
 					autoComplete="off"
 					variant="outlined"
 				/>
 
 				<Button className="relative w-full" variant="contained" type="submit">
 					{isPending && <CircleLoader className="absolute inset-y-0 left-4 my-auto" />}
-					Agregar
+					Actualizar
 				</Button>
 			</fieldset>
 		</form>

@@ -1,28 +1,26 @@
 "use client"
 
-import { useRouter } from "next/navigation"
-import { deleteLink } from "~/actions/links"
-import { DeleteIcon, DotsVertical } from "~/components/svg"
+import { useState } from "react"
+import { DotsVertical } from "~/components/svg"
 import { UpdateLinkDialog } from "~/components/dialogs/update-link-dialog"
 import { Popover, PopoverContent, PopoverTrigger } from "~/components/ui/popover"
+import { DeleteLinkOption } from "~/components/delete-link-option"
 
 interface Props {
-	linkId: string
-	linkUrl: string
+	id: string
+	url: string
 }
 
-export const LinkOptionsPopover: React.FC<Props> = ({ linkId, linkUrl }) => {
-	const router = useRouter()
-
-	const handleDelete = async () => {
-		await deleteLink(linkId)
-		router.refresh()
-	}
+export const LinkOptionsPopover: React.FC<Props> = ({ id, url }) => {
+	const [open, setOpen] = useState(false)
 
 	return (
-		<Popover modal>
+		<Popover modal open={open} onOpenChange={setOpen}>
 			<PopoverTrigger asChild>
-				<button className="relative z-10 rounded-md p-1.5 transition-[background-color] hover:bg-[hsl(0_0%_70%/0.1)]">
+				<button
+					aria-label="Abrir opciones"
+					className="relative z-10 rounded-md p-1.5 transition-[background-color] hover:bg-[hsl(0_0%_70%/0.1)]"
+				>
 					<DotsVertical className="size-4" />
 				</button>
 			</PopoverTrigger>
@@ -30,14 +28,8 @@ export const LinkOptionsPopover: React.FC<Props> = ({ linkId, linkUrl }) => {
 				<div className="mb-1 border-b border-b-stroke px-2 py-1.5 font-semibold">
 					Opciones del link
 				</div>
-
-				<UpdateLinkDialog url={linkUrl} />
-				<button
-					className="flex w-full items-center gap-x-2 rounded-sm px-2 py-1.5 text-red-400 hover:bg-[hsl(0_0%_70%/0.1)]"
-					onClick={handleDelete}
-				>
-					<DeleteIcon className="size-4" /> Eliminar
-				</button>
+				<UpdateLinkDialog id={id} url={url} />
+				<DeleteLinkOption id={id} afterDelete={() => setOpen(false)} />
 			</PopoverContent>
 		</Popover>
 	)

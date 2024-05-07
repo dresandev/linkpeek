@@ -1,7 +1,10 @@
 import { Clover, Stars, ThumbUp } from "~/components/svg"
-import { AddLink } from "~/components/add-link"
+import { AddLinkDialog } from "~/components/dialogs/add-link-dialog"
+import { LoginButton } from "~/components/login-button"
 
 export const Header = () => {
+	const isValidUser = true
+
 	return (
 		<header className="relative px-5 pb-10 pt-24 md:pt-32">
 			<div className="bg-grid absolute inset-0 -bottom-32 -z-10"></div>
@@ -26,7 +29,7 @@ export const Header = () => {
 				Gestiona tus links de manera rapida, simple, sencilla, amigable, honesta, correcta,
 				apasionada, creible, fiable, responsable y sobre todo divergente
 			</p>
-			<AddLink />
+			{isValidUser ? <AddLinkDialog /> : <LoginButton />}
 		</header>
 	)
 }

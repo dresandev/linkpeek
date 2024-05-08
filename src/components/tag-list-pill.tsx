@@ -1,11 +1,11 @@
 import { cn } from "~/lib/utils"
 
 interface Props {
-	label: string
+	name: string
 	isSelected?: boolean
 }
 
-export const TagPill: React.FC<Props> = ({ label, isSelected }) => {
+export const TagListPill: React.FC<Props> = ({ name, isSelected }) => {
 	return (
 		<button
 			className={cn(
@@ -24,7 +24,7 @@ export const TagPill: React.FC<Props> = ({ label, isSelected }) => {
 					"scale-[0.95] transition-[transform,background-color] duration-150": !isSelected,
 				})}
 			></div>
-			{label}
+			{name}
 		</button>
 	)
 }

@@ -1,18 +1,15 @@
-import { TagPill } from "~/components/tag-pill"
+import { getTags } from "~/actions/tags"
+import { TagListPill } from "~/components/tag-list-pill"
 
-const TAGS = [
-	{ label: "Todo", isSelected: true },
-	{ label: "Javascript" },
-	{ label: "Typescript" },
-	{ label: "CSS" },
-	{ label: "HTML" },
-]
+export const TagList = async () => {
+	const tags = await getTags()
 
-export const TagList = () => {
 	return (
-		<div className="-mx-5 flex gap-x-4 overflow-x-auto px-5 py-2 no-scrollbar">
-			{TAGS.map((tag) => (
-				<TagPill key={tag.label} {...tag} />
+		<div className="no-scrollbar -mx-5 flex gap-x-4 overflow-x-auto px-5 py-2">
+			<TagListPill name="Todo" isSelected />
+
+			{tags.map((tag) => (
+				<TagListPill key={tag.id} {...tag} />
 			))}
 		</div>
 	)

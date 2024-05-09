@@ -1,5 +1,7 @@
 "use client"
 
+import { useState } from "react"
+import { type Tag } from "~/types"
 import { addLink } from "~/actions/links"
 import { useOnLinkFormSubmit } from "~/hooks/use-on-link-form-submit"
 import { Input } from "~/components/ui/input"
@@ -12,8 +14,9 @@ interface Props {
 }
 
 export const AddLinkForm: React.FC<Props> = ({ afterSubmit }) => {
+	const [tags, setTags] = useState<Tag[]>([])
 	const { handleSubmit, isPending } = useOnLinkFormSubmit({
-		action: async (link) => await addLink(link),
+		action: async (formData) => await addLink({ ...formData, tags }),
 		afterSubmit,
 	})
 
@@ -35,7 +38,7 @@ export const AddLinkForm: React.FC<Props> = ({ afterSubmit }) => {
 				<label className="inline-block pb-2 font-medium" htmlFor="tags-input">
 					Tags <span className="text-[hsl(240_5%_71%)]">(Separa con espacio)</span>
 				</label>
-				<TagsInput id="tags-input" className="mb-4" />
+				<TagsInput id="tags-input" className="mb-4" tags={tags} setTags={setTags} />
 
 				<Button className="relative w-full" variant="contained" type="submit">
 					{isPending && <CircleLoader className="absolute inset-y-0 left-4 my-auto" />}

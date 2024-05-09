@@ -5,7 +5,7 @@ import { type Link } from "~/types"
 import { getPageMetadata } from "~/actions/metadata"
 
 interface Props {
-	action: (link: Link) => Promise<void>
+	action: (formData: Omit<Link, "tags">) => Promise<void>
 	afterSubmit: () => void
 }
 
@@ -30,7 +30,7 @@ export const useOnLinkFormSubmit = ({ action, afterSubmit }: Props) => {
 
 			const { ogImage, ...restMetadata } = metadata
 
-			const ogImageUrl = !ogImage ? null : ogImage.includes("https") ? ogImage : `${url}${ogImage}`
+			const ogImageUrl = ogImage ? (ogImage.includes("https") ? ogImage : `${url}${ogImage}`) : null
 
 			await action({ url, ogImageUrl, ...restMetadata })
 			router.refresh()

@@ -8,8 +8,13 @@ export const getLinks = async () => {
   return links
 }
 
-export const addLink = async (link: Link) => {
-  await db.link.create({ data: link })
+export const addLink = async ({ tags, ...link }: Link) => {
+  await db.link.create({
+    data: {
+      ...link,
+      tags: { create: tags, connect: [{ id: "clvynvs5z00019ga7lqe905sn" }] }
+    }
+  })
 }
 
 export const updateLink = async (id: string, link: Link) => {

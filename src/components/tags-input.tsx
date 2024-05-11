@@ -1,9 +1,9 @@
 "use client"
 
-import { useRef } from "react"
+import { useRef, useState } from "react"
 import { type Tag } from "~/types"
 import { cn } from "~/lib/utils"
-// import { TagSuggester } from "~/components/tag-suggester"
+import { TagSuggester } from "~/components/tag-suggester"
 import { X } from "~/components/svg"
 
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -12,6 +12,7 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
 }
 
 export const TagsInput: React.FC<Props> = ({ className, tags, setTags, ...props }) => {
+	const [tagValue, setTagValue] = useState("")
 	const inputRef = useRef<HTMLInputElement>(null)
 
 	const handleKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (e) => {
@@ -49,6 +50,10 @@ export const TagsInput: React.FC<Props> = ({ className, tags, setTags, ...props 
 		inputRef.current?.focus()
 	}
 
+	const handleOnChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+		setTagValue(e.currentTarget.value)
+	}
+
 	return (
 		<div
 			className={cn(
@@ -76,7 +81,6 @@ export const TagsInput: React.FC<Props> = ({ className, tags, setTags, ...props 
 				))}
 			</ul>
 			<input
-				ref={inputRef}
 				role="combobox"
 				aria-expanded={false}
 				aria-controls="tags-popup"
@@ -86,10 +90,13 @@ export const TagsInput: React.FC<Props> = ({ className, tags, setTags, ...props 
 				type="text"
 				autoComplete="off"
 				spellCheck="false"
+				ref={inputRef}
+				value={tagValue}
 				onKeyDown={handleKeyDown}
+				onChange={handleOnChange}
 				{...props}
 			/>
-			{/* <TagSuggester /> */}
+			<TagSuggester q={tagValue} onSelect={(tag) => setTags([...tags, tag])} />
 		</div>
 	)
 }

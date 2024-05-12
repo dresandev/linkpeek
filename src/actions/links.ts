@@ -1,18 +1,24 @@
 "use server"
 
-import { db } from '~/lib/db'
-import { type Link } from '~/types'
+import { db } from "~/lib/db"
+import { type Link } from "~/types"
 
 export const getLinks = async () => {
-  const links = await db.link.findMany({ orderBy: { createdAt: 'desc' } })
+  const links = await db.link.findMany({ orderBy: { createdAt: "desc" } })
   return links
 }
 
-export const addLink = async ({ newTags, tags, ...link }: Link) => {
+export const createLink = async ({ tags, ...link }: Link) => {
+  const toConnectTags = tags.filter(tag => "id" in tag)
+  const toCreateTags = tags.filter(tag => !('id' in tag))
+
   await db.link.create({
     data: {
       ...link,
-      tags: { create: newTags, connect: tags }
+      tags: {
+        connect: toConnectTags,
+        create: toCreateTags,
+      }
     }
   })
 }

@@ -1,41 +1,48 @@
 "use client"
 
+import type {
+	InputHTMLAttributes,
+	Dispatch,
+	SetStateAction,
+	FC,
+	KeyboardEventHandler,
+	ChangeEventHandler,
+} from "react"
 import { useRef, useState } from "react"
 import { type Tag } from "~/types"
 import { cn } from "~/lib/utils"
 import { TagSuggester } from "~/components/tag-suggester"
 import { X } from "~/components/svg"
 
-interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
+interface Props extends InputHTMLAttributes<HTMLInputElement> {
 	tags: Tag[]
-	setTags: React.Dispatch<React.SetStateAction<Tag[]>>
+	setTags: Dispatch<SetStateAction<Tag[]>>
 }
 
-export const TagsInput: React.FC<Props> = ({ className, tags, setTags, ...props }) => {
+export const TagsInput: FC<Props> = ({ className, tags, setTags, ...props }) => {
 	const [tagValue, setTagValue] = useState("")
 	const inputRef = useRef<HTMLInputElement>(null)
 
-	const handleKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (e) => {
-		const currentValue = e.currentTarget.value.trim().toLowerCase()
-		const isTagAdded = tags.some((tag) => tag.name === currentValue)
+	const isTagAdded = tags.some((tag) => tag.name === tagValue)
 
-		const addTag = () => {
-			if (!currentValue || isTagAdded) return
-			setTags([...tags, { name: currentValue }])
-			e.currentTarget.value = ""
-		}
+	const addTag = () => {
+		if (!tagValue || isTagAdded) return
+		setTags([...tags, { name: tagValue.trim().toLowerCase() }])
+		setTagValue("")
+	}
 
+	const handleKeyDown: KeyboardEventHandler<HTMLInputElement> = (e) => {
 		if (e.code === "Space") {
-			if (isTagAdded || !currentValue) return e.preventDefault()
+			if (isTagAdded || !tagValue) return e.preventDefault()
 			return addTag()
 		}
 
-		if (e.code === "Enter" && currentValue) {
+		if (e.code === "Enter" && tagValue) {
 			e.preventDefault()
 			return addTag()
 		}
 
-		if (e.code === "Backspace" && !currentValue && tags.length) {
+		if (e.code === "Backspace" && !tagValue && tags.length) {
 			const filteredTags = tags.slice(0, -1)
 			setTags(filteredTags)
 		}
@@ -50,8 +57,13 @@ export const TagsInput: React.FC<Props> = ({ className, tags, setTags, ...props 
 		inputRef.current?.focus()
 	}
 
-	const handleOnChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+	const handleOnChange: ChangeEventHandler<HTMLInputElement> = (e) => {
 		setTagValue(e.currentTarget.value)
+	}
+
+	const handleOnSelect = (tag: Tag) => {
+		setTags([...tags, tag])
+		setTagValue("")
 	}
 
 	return (
@@ -96,7 +108,7 @@ export const TagsInput: React.FC<Props> = ({ className, tags, setTags, ...props 
 				onChange={handleOnChange}
 				{...props}
 			/>
-			<TagSuggester q={tagValue} onSelect={(tag) => setTags([...tags, tag])} />
+			<TagSuggester searchTerm={tagValue} onSelect={handleOnSelect} />
 		</div>
 	)
 }

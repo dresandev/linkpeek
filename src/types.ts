@@ -9,5 +9,4 @@ export interface Link {
   title: string,
   description: string | null,
   tags: Tag[]
-  newTags: Tag[]
 }

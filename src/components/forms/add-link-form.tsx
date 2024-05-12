@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { type Tag } from "~/types"
-import { addLink } from "~/actions/links"
+import { createLink } from "~/actions/links"
 import { useOnLinkFormSubmit } from "~/hooks/use-on-link-form-submit"
 import { Input } from "~/components/ui/input"
 import { Button } from "~/components/ui/button"
@@ -16,7 +16,7 @@ interface Props {
 export const AddLinkForm: React.FC<Props> = ({ afterSubmit }) => {
 	const [tags, setTags] = useState<Tag[]>([])
 	const { handleSubmit, isPending } = useOnLinkFormSubmit({
-		action: async (formData) => await addLink({ ...formData, tags }),
+		action: async (formData) => await createLink({ ...formData, tags }),
 		afterSubmit,
 	})
 

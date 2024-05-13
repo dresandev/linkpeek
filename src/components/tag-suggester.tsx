@@ -25,6 +25,8 @@ export const TagSuggester: FC<Props> = ({
 	const listboxRef = useRef<HTMLUListElement>(null)
 
 	useEffect(() => {
+		if (!debouncedSearchTerm) return setSuggestedTags([])
+
 		const getTags = async () => {
 			const suggestedTags = await searchTags(debouncedSearchTerm.toLowerCase())
 			if (!suggestedTags) return setSuggestedTags([])

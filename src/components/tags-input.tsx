@@ -134,7 +134,7 @@ export const TagsInput: FC<Props> = ({ className, tags, setTags, ...props }) => 
 			</ul>
 			<input
 				role="combobox"
-				aria-expanded={false}
+				aria-expanded={!!suggestedTags.length}
 				aria-controls="tags-popup"
 				aria-autocomplete="list"
 				aria-haspopup="listbox"

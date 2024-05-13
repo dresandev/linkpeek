@@ -9,42 +9,82 @@ import type {
 	ChangeEventHandler,
 } from "react"
 import { useRef, useState } from "react"
-import { type Tag } from "~/types"
 import { cn } from "~/lib/utils"
 import { TagSuggester } from "~/components/tag-suggester"
 import { X } from "~/components/svg"
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
-	tags: Tag[]
-	setTags: Dispatch<SetStateAction<Tag[]>>
+	tags: string[]
+	setTags: Dispatch<SetStateAction<string[]>>
 }
 
 export const TagsInput: FC<Props> = ({ className, tags, setTags, ...props }) => {
-	const [tagValue, setTagValue] = useState("")
+	const [suggestedTags, setSuggestedTags] = useState<string[]>([])
+	const [inputValue, setTagValue] = useState("")
+	const [suggestedTagIdx, setSuggestedTagIdx] = useState<number | null>(null)
 	const inputRef = useRef<HTMLInputElement>(null)
 
-	const isTagAdded = tags.some((tag) => tag.name === tagValue)
+	const isTagAdded = tags.some((tag) => tag === inputValue)
+	const maxSuggestedTagsLength = suggestedTags.length - 1
 
-	const addTag = () => {
-		if (!tagValue || isTagAdded) return
-		setTags([...tags, { name: tagValue.trim().toLowerCase() }])
+	const addTag = (newTag: string) => {
+		if (!newTag || isTagAdded) return
+		setTags([...tags, newTag])
 		setTagValue("")
 	}
 
 	const handleKeyDown: KeyboardEventHandler<HTMLInputElement> = (e) => {
-		if (e.code === "Space") {
-			if (isTagAdded || !tagValue) return e.preventDefault()
-			return addTag()
-		}
+		switch (e.code) {
+			case "Space":
+				if (isTagAdded || !inputValue) {
+					e.preventDefault()
+					break
+				}
+				addTag(inputValue)
+				break
 
-		if (e.code === "Enter" && tagValue) {
-			e.preventDefault()
-			return addTag()
-		}
+			case "Enter":
+				if (!inputValue) break
 
-		if (e.code === "Backspace" && !tagValue && tags.length) {
-			const filteredTags = tags.slice(0, -1)
-			setTags(filteredTags)
+				e.preventDefault()
+
+				if (suggestedTagIdx !== null) {
+					addTag(suggestedTags.at(suggestedTagIdx)!)
+					break
+				}
+
+				addTag(inputValue)
+				break
+
+			case "Backspace":
+				if (inputValue || !tags.length) break
+				const filteredTags = tags.slice(0, -1)
+				setTags(filteredTags)
+				break
+
+			case "ArrowUp":
+				if (suggestedTags.length) e.preventDefault()
+
+				if (suggestedTagIdx === null) {
+					return setSuggestedTagIdx(maxSuggestedTagsLength)
+				}
+				if (suggestedTagIdx > 0) {
+					return setSuggestedTagIdx(-1)
+				}
+				setSuggestedTagIdx(null)
+				break
+
+			case "ArrowDown":
+				if (suggestedTags.length) e.preventDefault()
+
+				if (suggestedTagIdx === null) {
+					return setSuggestedTagIdx(0)
+				}
+				if (suggestedTagIdx < maxSuggestedTagsLength) {
+					return setSuggestedTagIdx(suggestedTagIdx + 1)
+				}
+				setSuggestedTagIdx(null)
+				break
 		}
 	}
 
@@ -58,10 +98,10 @@ export const TagsInput: FC<Props> = ({ className, tags, setTags, ...props }) => 
 	}
 
 	const handleOnChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-		setTagValue(e.currentTarget.value)
+		setTagValue(e.currentTarget.value.trim().toLowerCase())
 	}
 
-	const handleOnSelect = (tag: Tag) => {
+	const handleOnSelect = (tag: string) => {
 		setTags([...tags, tag])
 		setTagValue("")
 	}
@@ -77,10 +117,10 @@ export const TagsInput: FC<Props> = ({ className, tags, setTags, ...props }) => 
 			<ul className="flex items-center gap-1">
 				{tags.map((tag, idx) => (
 					<li
-						key={tag.name}
+						key={tag}
 						className="inline-flex h-[26px] items-center gap-1 rounded-full bg-text px-2 text-sm font-medium text-surface"
 					>
-						<span className="leading-normal">{tag.name}</span>
+						<span className="leading-normal">{tag}</span>
 						<button
 							type="button"
 							tabIndex={-1}
@@ -103,12 +143,18 @@ export const TagsInput: FC<Props> = ({ className, tags, setTags, ...props }) => 
 				autoComplete="off"
 				spellCheck="false"
 				ref={inputRef}
-				value={tagValue}
+				value={inputValue}
 				onKeyDown={handleKeyDown}
 				onChange={handleOnChange}
 				{...props}
 			/>
-			<TagSuggester searchTerm={tagValue} onSelect={handleOnSelect} />
+			<TagSuggester
+				searchTerm={inputValue}
+				onSelect={handleOnSelect}
+				suggestedTags={suggestedTags}
+				suggestedTagIdx={suggestedTagIdx}
+				setSuggestedTags={setSuggestedTags}
+			/>
 		</div>
 	)
 }

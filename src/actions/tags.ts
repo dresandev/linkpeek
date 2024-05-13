@@ -10,6 +10,8 @@ export const getTags = async () => {
 export const searchTags = async (q: string) => {
   if (!q) return
 
-  const tags = await db.tag.findMany({ where: { name: { startsWith: q } } })
+  const tags = await db.tag.findMany({
+    where: { name: { startsWith: q } }
+  })
   return tags
 }

@@ -9,14 +9,22 @@ export const getLinks = async () => {
 }
 
 export const createLink = async ({ tags, ...link }: Link) => {
-  const toConnectTags = tags.filter(tag => "id" in tag)
-  const toCreateTags = tags.filter(tag => !('id' in tag))
+  const existingTags = await db.tag.findMany({
+    where: {
+      name: { in: tags }
+    }
+  })
+
+  const existingTagNames = existingTags.map(tag => tag.name);
+  const newTagNames = tags.filter(tag => !existingTagNames.includes(tag));
+  const toCreateTags = newTagNames.map(name => ({ name }));
+
 
   await db.link.create({
     data: {
       ...link,
       tags: {
-        connect: toConnectTags,
+        connect: existingTags,
         create: toCreateTags,
       }
     }

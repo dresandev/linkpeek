@@ -1,15 +1,16 @@
 import type { FC, MouseEventHandler, Dispatch, SetStateAction } from "react"
 import { useEffect, useRef } from "react"
 import { useDebounce } from "@uidotdev/usehooks"
+import { Tag } from "~/types"
 import { searchTags } from "~/actions/tags"
 import { cn } from "~/lib/utils"
 
 interface Props {
 	searchTerm: string
-	suggestedTags: string[]
-	setSuggestedTags: Dispatch<SetStateAction<string[]>>
+	suggestedTags: Tag[]
+	setSuggestedTags: Dispatch<SetStateAction<Tag[]>>
 	suggestedTagIdx: number | null
-	onSelect: (tag: string) => void
+	onSelect: (tag: Tag) => void
 }
 
 const DEBOUNCE_TIME = 250
@@ -30,8 +31,7 @@ export const TagSuggester: FC<Props> = ({
 		const getTags = async () => {
 			const suggestedTags = await searchTags(debouncedSearchTerm.toLowerCase())
 			if (!suggestedTags) return setSuggestedTags([])
-			const tagsNames = suggestedTags.map((tag) => tag.name)
-			setSuggestedTags(tagsNames)
+			setSuggestedTags(suggestedTags)
 		}
 
 		getTags()
@@ -70,11 +70,11 @@ export const TagSuggester: FC<Props> = ({
 					role="option"
 					aria-selected={false}
 					data-idx={idx}
-					key={tag}
+					key={tag.id}
 					className="bg-secondary-surface px-4 py-1 font-semibold hover:bg-text hover:text-surface aria-selected:bg-text aria-selected:text-surface"
 					onClick={handleOnClick}
 				>
-					{tag}
+					{tag.name}
 				</li>
 			))}
 		</ul>

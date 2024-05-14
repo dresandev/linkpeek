@@ -9,27 +9,28 @@ import type {
 	ChangeEventHandler,
 } from "react"
 import { useRef, useState } from "react"
+import { Tag } from "~/types"
 import { cn } from "~/lib/utils"
 import { TagSuggester } from "~/components/tag-suggester"
 import { X } from "~/components/svg"
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
-	tags: string[]
-	setTags: Dispatch<SetStateAction<string[]>>
+	tags: Tag[]
+	setTags: Dispatch<SetStateAction<Tag[]>>
 }
 
 export const TagsInput: FC<Props> = ({ className, tags, setTags, ...props }) => {
-	const [suggestedTags, setSuggestedTags] = useState<string[]>([])
-	const [inputValue, setTagValue] = useState("")
+	const [suggestedTags, setSuggestedTags] = useState<Tag[]>([])
 	const [suggestedTagIdx, setSuggestedTagIdx] = useState<number | null>(null)
+	const [inputValue, setTagValue] = useState("")
 	const inputRef = useRef<HTMLInputElement>(null)
 
-	const isTagAdded = tags.some((tag) => tag === inputValue)
+	const isTagAdded = tags.some((tag) => tag.name === inputValue)
 	const maxSuggestedTagsLength = suggestedTags.length - 1
 
-	const addTag = (newTag: string) => {
-		if (!newTag || isTagAdded) return
-		setTags([...tags, newTag])
+	const addTag = (tagName: string) => {
+		if (!tagName || isTagAdded) return
+		setTags([...tags, { name: tagName }])
 		setTagValue("")
 	}
 
@@ -49,7 +50,7 @@ export const TagsInput: FC<Props> = ({ className, tags, setTags, ...props }) => 
 				e.preventDefault()
 
 				if (suggestedTagIdx !== null) {
-					addTag(suggestedTags.at(suggestedTagIdx)!)
+					addTag(suggestedTags.at(suggestedTagIdx)!.name)
 					break
 				}
 
@@ -101,7 +102,7 @@ export const TagsInput: FC<Props> = ({ className, tags, setTags, ...props }) => 
 		setTagValue(e.currentTarget.value.trim().toLowerCase())
 	}
 
-	const handleOnSelect = (tag: string) => {
+	const handleOnSelect = (tag: Tag) => {
 		setTags([...tags, tag])
 		setTagValue("")
 	}
@@ -117,10 +118,10 @@ export const TagsInput: FC<Props> = ({ className, tags, setTags, ...props }) => 
 			<ul className="flex items-center gap-1">
 				{tags.map((tag, idx) => (
 					<li
-						key={tag}
+						key={tag.name}
 						className="inline-flex h-[26px] items-center gap-1 rounded-full bg-text px-2 text-sm font-medium text-surface"
 					>
-						<span className="leading-normal">{tag}</span>
+						<span className="leading-normal">{tag.name}</span>
 						<button
 							type="button"
 							tabIndex={-1}

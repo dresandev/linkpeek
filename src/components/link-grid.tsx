@@ -18,7 +18,7 @@ export const LinkGrid = async () => {
 		<section className="mb-40 mt-9 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:md:grid-cols-4">
 			<h2 className="sr-only">Tarjetas de links</h2>
 			{links.map((link) => (
-				<LinkCard key={link.id} {...link} />
+				<LinkCard key={link.id} link={link} />
 			))}
 		</section>
 	)

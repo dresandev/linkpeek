@@ -28,7 +28,7 @@ export const getPageMetadata = async (url: string) => {
 			description,
 		}
 	} catch (error) {
-		console.log(error);
+		console.log(error)
 		return null
 	}
 }

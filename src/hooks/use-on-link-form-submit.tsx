@@ -1,7 +1,7 @@
 import { useTransition } from "react"
 import { useRouter } from "next/navigation"
 import { toast } from "sonner"
-import { type Link } from "~/types"
+import type { Link } from "~/types"
 import { getPageMetadata } from "~/actions/metadata"
 
 interface Props {

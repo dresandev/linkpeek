@@ -1,17 +1,17 @@
 "use client"
 
 import { useState } from "react"
+import { Link } from "~/types"
 import { DotsVertical } from "~/components/svg"
 import { UpdateLinkDialog } from "~/components/dialogs/update-link-dialog"
 import { Popover, PopoverContent, PopoverTrigger } from "~/components/ui/popover"
 import { DeleteLinkOption } from "~/components/delete-link-option"
 
 interface Props {
-	id: string
-	url: string
+	link: Link
 }
 
-export const LinkOptionsPopover: React.FC<Props> = ({ id, url }) => {
+export const LinkOptionsPopover: React.FC<Props> = ({ link }) => {
 	const [open, setOpen] = useState(false)
 
 	return (
@@ -28,8 +28,8 @@ export const LinkOptionsPopover: React.FC<Props> = ({ id, url }) => {
 				<div className="mb-1 border-b border-b-stroke px-2 py-1.5 font-semibold">
 					Opciones del link
 				</div>
-				<UpdateLinkDialog id={id} url={url} />
-				<DeleteLinkOption id={id} afterDelete={() => setOpen(false)} />
+				<UpdateLinkDialog link={link} />
+				<DeleteLinkOption id={link.id!} afterDelete={() => setOpen(false)} />
 			</PopoverContent>
 		</Popover>
 	)

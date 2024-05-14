@@ -1,34 +1,31 @@
+import { Link } from "~/types"
 import { cn } from "~/lib/utils"
 import { LinkOptionsPopover } from "~/components/link-options-popover"
 
 interface Props {
-	id: string
-	url: string
-	title: string
-	ogImageUrl: string | null
-	description: string | null
+	link: Link
 }
 
-export const LinkCard: React.FC<Props> = ({ id, url, ogImageUrl, title, description }) => {
+export const LinkCard: React.FC<Props> = ({ link }) => {
 	return (
 		<div className="relative isolate animate-fade-in overflow-hidden rounded-lg bg-secondary-surface">
 			<a
 				className={cn(
 					"absolute inset-0 z-10 text-[0] focus-visible:rounded-md focus-visible:-outline-offset-2 [&:hover~div_h3]:underline",
 					{
-						"[&:hover~picture>img]:scale-105": ogImageUrl,
+						"[&:hover~picture>img]:scale-105": link.ogImageUrl,
 					}
 				)}
-				href={url}
+				href={link.url}
 				target="_blank"
 			>
-				{title}
+				{link.title}
 			</a>
-			{ogImageUrl ? (
+			{link.ogImageUrl ? (
 				<picture className="block overflow-hidden">
 					<img
 						className="aspect-video w-full object-cover object-center transition-transform duration-300"
-						src={ogImageUrl}
+						src={link.ogImageUrl}
 						alt=""
 						width={358}
 						height={183}
@@ -39,10 +36,10 @@ export const LinkCard: React.FC<Props> = ({ id, url, ogImageUrl, title, descript
 			)}
 			<div className="p-5 pt-3">
 				<div className="flex items-start justify-between pb-2">
-					<h3 className="text-lg font-medium leading-tight">{title}</h3>
-					<LinkOptionsPopover id={id} url={url} />
+					<h3 className="text-lg font-medium leading-tight">{link.title}</h3>
+					<LinkOptionsPopover link={link} />
 				</div>
-				<p className="line-clamp-3 text-sm">{description}</p>
+				<p className="line-clamp-3 text-sm">{link.description}</p>
 			</div>
 		</div>
 	)

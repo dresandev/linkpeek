@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { type Tag } from "~/types"
+import { Tag } from "~/types"
 import { createLink } from "~/actions/links"
 import { useOnLinkFormSubmit } from "~/hooks/use-on-link-form-submit"
 import { Input } from "~/components/ui/input"

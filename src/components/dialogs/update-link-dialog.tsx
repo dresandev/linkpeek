@@ -1,16 +1,16 @@
 "use client"
 
 import { useState } from "react"
+import { Link } from "~/types"
 import { PencilIcon } from "~/components/svg"
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "~/components/ui/dialog"
 import { UpdateLinkForm } from "~/components/forms/update-link-form"
 
 interface Props {
-	id: string
-	url: string
+	link: Link
 }
 
-export const UpdateLinkDialog: React.FC<Props> = ({ id, url }) => {
+export const UpdateLinkDialog: React.FC<Props> = ({ link }) => {
 	const [open, setOpen] = useState(false)
 
 	return (
@@ -22,7 +22,7 @@ export const UpdateLinkDialog: React.FC<Props> = ({ id, url }) => {
 			</DialogTrigger>
 			<DialogContent>
 				<DialogTitle>Editar Link</DialogTitle>
-				<UpdateLinkForm id={id} url={url} afterSubmit={() => setOpen(false)} />
+				<UpdateLinkForm link={link} afterSubmit={() => setOpen(false)} />
 			</DialogContent>
 		</Dialog>
 	)

@@ -3,8 +3,9 @@
 import { db } from "~/lib/db"
 import { type Link } from "~/types"
 
-export const getLinks = async () => {
+export const getLinks = async (tagFilter?: string) => {
   const links = await db.link.findMany({
+    where: { tags: { some: { name: { equals: tagFilter } } } },
     include: { tags: true },
     orderBy: { createdAt: "desc" }
   })

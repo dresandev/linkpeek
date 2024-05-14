@@ -2,14 +2,18 @@ import { getLinks } from "~/actions/links"
 import { LinkCard } from "~/components/link-card"
 import { NoItems } from "~/components/svg"
 
-export const LinkGrid = async () => {
-	const links = await getLinks()
+interface Props {
+	tagFilter?: string
+}
+
+export const LinkGrid: React.FC<Props> = async ({ tagFilter }) => {
+	const links = await getLinks(tagFilter)
 
 	if (!links.length) {
 		return (
 			<>
 				<NoItems className="mx-auto mb-4 mt-36 w-full" />
-				<p className="mb-36 text-center text-xl">No tienes links guardados</p>
+				<p className="mb-36 text-center text-xl">No hay links 🥴</p>
 			</>
 		)
 	}

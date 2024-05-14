@@ -8,7 +8,7 @@ interface Props {
 
 export const LinkCard: React.FC<Props> = ({ link }) => {
 	return (
-		<div className="relative isolate animate-fade-in overflow-hidden rounded-lg bg-secondary-surface">
+		<div className="relative isolate overflow-hidden rounded-lg bg-secondary-surface">
 			<a
 				className={cn(
 					"absolute inset-0 z-10 text-[0] focus-visible:rounded-md focus-visible:-outline-offset-2 [&:hover~div_h3]:underline",

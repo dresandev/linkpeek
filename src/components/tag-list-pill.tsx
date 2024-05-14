@@ -3,12 +3,11 @@ import { cn } from "~/lib/utils"
 
 interface Props {
 	name: string
-	tagFilter: string
+	isSelected: boolean
 }
 
-export const TagListPill: React.FC<Props> = ({ name, tagFilter }) => {
+export const TagListPill: React.FC<Props> = ({ name, isSelected }) => {
 	const href = name !== "Todo" ? `/?tag=${name}` : "?"
-	const isSelected = name === tagFilter
 
 	return (
 		<Link

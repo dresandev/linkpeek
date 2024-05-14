@@ -10,9 +10,9 @@ export const TagList: React.FC<Props> = async ({ tagFilter = "Todo" }) => {
 
 	return (
 		<div className="no-scrollbar -mx-5 flex gap-x-4 overflow-x-auto px-5 py-2">
-			<TagListPill name="Todo" tagFilter={tagFilter} />
+			<TagListPill name="Todo" isSelected={tagFilter === "Todo"} />
 			{tags.map(({ id, name }) => (
-				<TagListPill key={id} name={name} tagFilter={tagFilter} />
+				<TagListPill key={id} name={name} isSelected={name === tagFilter} />
 			))}
 		</div>
 	)

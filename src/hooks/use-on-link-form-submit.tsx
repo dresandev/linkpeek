@@ -24,7 +24,7 @@ export const useOnLinkFormSubmit = ({ action, afterSubmit }: Props) => {
 			const metadata = await getPageMetadata(url)
 
 			if (!metadata) {
-				toast("La URL no es válida.")
+				toast.error("La URL no es válida.")
 				return
 			}
 

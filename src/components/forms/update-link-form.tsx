@@ -19,8 +19,14 @@ export const UpdateLinkForm: React.FC<Props> = ({ link, afterSubmit }) => {
 	const [tags, setTags] = useState<Tag[]>(link.tags)
 	const { handleSubmit, isPending } = useOnLinkFormSubmit({
 		action: async (formData) => {
-			await updateLink({ id: link.id, ...formData, tags })
-			toast("Link actualizado correctamente")
+			const response = await updateLink({ id: link.id, ...formData, tags })
+
+			if (response?.error) {
+				toast.error("No estas autorizado para realizar esta acción")
+				return
+			}
+
+			toast.success("Link actualizado correctamente")
 		},
 		afterSubmit,
 	})

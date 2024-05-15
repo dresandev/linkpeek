@@ -15,7 +15,7 @@ export const LinkGrid: React.FC<Props> = async ({ tagFilter, titleFilter }) => {
 		return (
 			<>
 				<NoItemsIllustration className="mx-auto mb-6 mt-24 h-auto w-full max-w-96" />
-				<p className="mb-24 text-center text-xl">Aún no hay links guardados.</p>
+				<p className="mb-24 text-center text-xl">No se encontraron Links guardados.</p>
 			</>
 		)
 	}

@@ -4,6 +4,7 @@ import { useTransition } from "react"
 import { useRouter } from "next/navigation"
 import { deleteLink } from "~/actions/links"
 import { DeleteIcon } from "~/components/svg"
+import { toast } from "sonner"
 
 interface Props {
 	id: string
@@ -16,9 +17,15 @@ export const DeleteLinkOption: React.FC<Props> = ({ id, afterDelete }) => {
 
 	const handleDelete = async () => {
 		startTransition(async () => {
-			await deleteLink(id)
+			const response = await deleteLink(id)
+
+			if (response?.error) {
+				toast.error("No estas autorizado para realizar esta acción")
+			} else {
+				router.refresh()
+			}
+
 			afterDelete()
-			router.refresh()
 		})
 	}
 

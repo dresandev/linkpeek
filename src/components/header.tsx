@@ -1,9 +1,11 @@
+import { auth } from "~/auth"
 import { Clover, Stars, ThumbUp } from "~/components/svg"
 import { AddLinkDialog } from "~/components/dialogs/add-link-dialog"
 import { LoginButton } from "~/components/login-button"
 
-export const Header = () => {
-	const isValidUser = true
+export const Header = async () => {
+	const session = await auth()
+	const isValidUser = session?.user?.email === process.env.AUTHORIZED_USER_GITHUB_EMAIL
 
 	return (
 		<header className="relative px-5 pb-10 pt-24 md:pt-32">

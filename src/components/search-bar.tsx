@@ -15,8 +15,8 @@ export const SearchBar = () => {
 		const { phrase } = Object.fromEntries(new FormData(e.currentTarget)) as {
 			phrase: string
 		}
-
-		const href = phrase ? `?phrase=${phrase}` : "?"
+		const searchParams = new URLSearchParams({ phrase }).toString()
+		const href = phrase ? `?${searchParams}` : "?"
 
 		router.replace(href, { scroll: false })
 	}

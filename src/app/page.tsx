@@ -19,7 +19,7 @@ export default function Home({ searchParams }: Props) {
 			<Header />
 			<main className="mx-auto max-w-[1472px] px-5">
 				<SearchBar />
-				<TagList tagFilter={tag} />
+				<TagList tagFilter={tag} titleFilter={phrase} />
 				<LinkGrid tagFilter={tag} titleFilter={phrase} />
 			</main>
 			<Footer />

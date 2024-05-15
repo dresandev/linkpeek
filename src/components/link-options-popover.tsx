@@ -14,6 +14,8 @@ interface Props {
 export const LinkOptionsPopover: React.FC<Props> = ({ link }) => {
 	const [open, setOpen] = useState(false)
 
+	const closePopover = () => setOpen(false)
+
 	return (
 		<Popover modal open={open} onOpenChange={setOpen}>
 			<PopoverTrigger asChild>
@@ -28,8 +30,8 @@ export const LinkOptionsPopover: React.FC<Props> = ({ link }) => {
 				<div className="mb-1 border-b border-b-stroke px-2 py-1.5 font-semibold">
 					Opciones del link
 				</div>
-				<UpdateLinkDialog link={link} />
-				<DeleteLinkOption id={link.id!} afterDelete={() => setOpen(false)} />
+				<UpdateLinkDialog link={link} afterUpdate={closePopover} />
+				<DeleteLinkOption id={link.id!} afterDelete={closePopover} />
 			</PopoverContent>
 		</Popover>
 	)

@@ -1,6 +1,6 @@
 import type { FC, MouseEventHandler, Dispatch, SetStateAction } from "react"
 import { useEffect, useRef } from "react"
-import { useDebounce } from "@uidotdev/usehooks"
+import { useDebounce } from "use-debounce"
 import { Tag } from "~/types"
 import { searchTags } from "~/actions/tags"
 import { cn } from "~/lib/utils"
@@ -10,7 +10,7 @@ interface Props {
 	suggestedTags: Tag[]
 	setSuggestedTags: Dispatch<SetStateAction<Tag[]>>
 	suggestedTagIdx: number | null
-	onSelect: (tag: Tag) => void
+	onSelect: (tagName: Tag) => void
 }
 
 const DEBOUNCE_TIME = 250
@@ -22,7 +22,7 @@ export const TagSuggester: FC<Props> = ({
 	suggestedTagIdx,
 	onSelect,
 }) => {
-	const debouncedSearchTerm = useDebounce(searchTerm, DEBOUNCE_TIME)
+	const [debouncedSearchTerm] = useDebounce(searchTerm, DEBOUNCE_TIME)
 	const listboxRef = useRef<HTMLUListElement>(null)
 
 	useEffect(() => {
@@ -52,7 +52,6 @@ export const TagSuggester: FC<Props> = ({
 	const handleOnClick: MouseEventHandler<HTMLLIElement> = (e) => {
 		const idx = Number(e.currentTarget.dataset.idx)
 		onSelect(suggestedTags[idx])
-		setSuggestedTags([])
 	}
 
 	return (

@@ -1,11 +1,24 @@
 "use server"
 
+import type { Link } from "~/types"
 import { db } from "~/lib/db"
-import { type Link } from "~/types"
 
-export const getLinks = async (tagFilter?: string) => {
+interface GetLinksOptions {
+  tagFilter?: string
+  titleFilter?: string
+}
+
+export const getLinks = async ({ tagFilter, titleFilter }: GetLinksOptions) => {
   const links = await db.link.findMany({
-    where: { tags: { some: { name: { equals: tagFilter } } } },
+    where: {
+      title: {
+        contains: titleFilter,
+        mode: "insensitive"
+      },
+      tags: {
+        some: { name: { equals: tagFilter } }
+      }
+    },
     include: { tags: true },
     orderBy: { createdAt: "desc" }
   })

@@ -1,4 +1,3 @@
-import { LuckyLink } from "~/components/lucky-link"
 import { Header } from "~/components/header"
 import { TagList } from "~/components/tag-list"
 import { LinkGrid } from "~/components/link-grid"
@@ -13,15 +12,15 @@ interface Props {
 
 export default function Home({ searchParams }: Props) {
 	const tag = searchParams.tag
+	const phrase = searchParams.phrase
 
 	return (
 		<>
-			<LuckyLink />
 			<Header />
 			<main className="mx-auto max-w-[1472px] px-5">
 				<SearchBar />
 				<TagList tagFilter={tag} />
-				<LinkGrid tagFilter={tag} />
+				<LinkGrid tagFilter={tag} titleFilter={phrase} />
 			</main>
 			<Footer />
 		</>

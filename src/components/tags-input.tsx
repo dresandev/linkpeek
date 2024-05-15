@@ -20,9 +20,9 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 export const TagsInput: FC<Props> = ({ className, tags, setTags, ...props }) => {
+	const [inputValue, setTagValue] = useState("")
 	const [suggestedTags, setSuggestedTags] = useState<Tag[]>([])
 	const [suggestedTagIdx, setSuggestedTagIdx] = useState<number | null>(null)
-	const [inputValue, setTagValue] = useState("")
 	const inputRef = useRef<HTMLInputElement>(null)
 
 	const isTagAdded = tags.some((tag) => tag.name === inputValue)
@@ -51,6 +51,8 @@ export const TagsInput: FC<Props> = ({ className, tags, setTags, ...props }) => 
 
 				if (suggestedTagIdx !== null) {
 					addTag(suggestedTags.at(suggestedTagIdx)!.name)
+					setSuggestedTagIdx(null)
+					setSuggestedTags([])
 					break
 				}
 
@@ -67,10 +69,12 @@ export const TagsInput: FC<Props> = ({ className, tags, setTags, ...props }) => 
 				if (suggestedTags.length) e.preventDefault()
 
 				if (suggestedTagIdx === null) {
-					return setSuggestedTagIdx(maxSuggestedTagsLength)
+					setSuggestedTagIdx(maxSuggestedTagsLength)
+					break
 				}
 				if (suggestedTagIdx > 0) {
-					return setSuggestedTagIdx(-1)
+					setSuggestedTagIdx(-1)
+					break
 				}
 				setSuggestedTagIdx(null)
 				break
@@ -79,10 +83,12 @@ export const TagsInput: FC<Props> = ({ className, tags, setTags, ...props }) => 
 				if (suggestedTags.length) e.preventDefault()
 
 				if (suggestedTagIdx === null) {
-					return setSuggestedTagIdx(0)
+					setSuggestedTagIdx(0)
+					break
 				}
 				if (suggestedTagIdx < maxSuggestedTagsLength) {
-					return setSuggestedTagIdx(suggestedTagIdx + 1)
+					setSuggestedTagIdx(suggestedTagIdx + 1)
+					break
 				}
 				setSuggestedTagIdx(null)
 				break
@@ -103,8 +109,8 @@ export const TagsInput: FC<Props> = ({ className, tags, setTags, ...props }) => 
 	}
 
 	const handleOnSelect = (tag: Tag) => {
-		setTags([...tags, tag])
-		setTagValue("")
+		addTag(tag.name)
+		setSuggestedTags([])
 	}
 
 	return (

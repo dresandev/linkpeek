@@ -8,10 +8,16 @@ import { UpdateLinkForm } from "~/components/forms/update-link-form"
 
 interface Props {
 	link: Link
+	afterUpdate: () => void
 }
 
-export const UpdateLinkDialog: React.FC<Props> = ({ link }) => {
+export const UpdateLinkDialog: React.FC<Props> = ({ link, afterUpdate }) => {
 	const [open, setOpen] = useState(false)
+
+	const afterSubmit = () => {
+		setOpen(false)
+		afterUpdate()
+	}
 
 	return (
 		<Dialog open={open} onOpenChange={setOpen}>
@@ -22,7 +28,7 @@ export const UpdateLinkDialog: React.FC<Props> = ({ link }) => {
 			</DialogTrigger>
 			<DialogContent>
 				<DialogTitle>Editar Link</DialogTitle>
-				<UpdateLinkForm link={link} afterSubmit={() => setOpen(false)} />
+				<UpdateLinkForm link={link} afterSubmit={afterSubmit} />
 			</DialogContent>
 		</Dialog>
 	)

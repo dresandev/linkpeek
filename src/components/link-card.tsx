@@ -11,7 +11,7 @@ export const LinkCard: React.FC<Props> = ({ link }) => {
 		<div className="relative isolate overflow-hidden rounded-lg bg-secondary-surface">
 			<a
 				className={cn(
-					"absolute inset-0 z-10 text-[0] focus-visible:rounded-md focus-visible:-outline-offset-2 [&:hover~div_h3]:underline",
+					"absolute inset-0 z-10 text-[0] focus-visible:rounded-md focus-visible:-outline-offset-2 [&:hover~div_h3]:underline [&:hover~div_h3]:decoration-2 [&:hover~div_h3]:underline-offset-4",
 					{
 						"[&:hover~picture>img]:scale-105": link.ogImageUrl,
 					}

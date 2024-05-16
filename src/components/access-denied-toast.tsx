@@ -11,7 +11,7 @@ export const AccessDeniedToast = () => {
 
 	useEffect(() => {
 		if (error === "AccessDenied" && !hasShown.current) {
-			toast.error("Acceso denegado")
+			toast.error("Acceso denegado, solo el dueño de la App puede iniciar sesión")
 			hasShown.current = true
 		}
 	}, [])

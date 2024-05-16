@@ -22,11 +22,11 @@ export const UpdateLinkForm: React.FC<Props> = ({ link, afterSubmit }) => {
 			const response = await updateLink({ id: link.id, ...formData, tags })
 
 			if (response?.error) {
-				toast.error("No estas autorizado para realizar esta acción")
+				toast.error(response?.error)
 				return
 			}
 
-			toast.success("Link actualizado correctamente")
+			toast.success("Link actualizado correctamente.")
 		},
 		afterSubmit,
 	})

@@ -29,7 +29,9 @@ export const getLinks = async ({ tagFilter, titleFilter }: GetLinksOptions) => {
 export const createLink = async (link: Link) => {
   const session = await auth()
 
-  if (!session) return { error: true }
+  if (!session) {
+    return { error: "No estas autorizado para realizar esta acción." }
+  }
 
   const tagsNames = link.tags.map(tag => tag.name)
   const existingTags = await db.tag.findMany({
@@ -52,7 +54,9 @@ export const createLink = async (link: Link) => {
 export const updateLink = async ({ id, tags, ...link }: Link) => {
   const session = await auth()
 
-  if (!session) return { error: true }
+  if (!session) {
+    return { error: "No estas autorizado para realizar esta acción." }
+  }
 
   const tagsNames = tags.map(tag => tag.name)
   const existingTags = await db.tag.findMany({
@@ -76,7 +80,9 @@ export const updateLink = async ({ id, tags, ...link }: Link) => {
 export const deleteLink = async (id: string,) => {
   const session = await auth()
 
-  if (!session) return { error: true }
+  if (!session) {
+    return { error: "No estas autorizado para realizar esta acción." }
+  }
 
   await db.link.delete({ where: { id } })
 }

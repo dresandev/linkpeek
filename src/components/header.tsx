@@ -2,14 +2,15 @@ import { auth } from "~/auth"
 import { Clover, Stars, ThumbUp } from "~/components/svg"
 import { AddLinkDialog } from "~/components/dialogs/add-link-dialog"
 import { LoginButton } from "~/components/login-button"
+import { LogoutButton } from "~/components/logout-button"
 
 export const Header = async () => {
 	const session = await auth()
-	const isValidUser = session?.user?.email === process.env.AUTHORIZED_USER_GITHUB_EMAIL
 
 	return (
-		<header className="relative px-5 pb-10 pt-24 md:pt-32">
+		<header className="relative px-5 pb-10 pt-32 md:pt-32">
 			<div className="bg-grid absolute inset-0 -bottom-32 -z-10"></div>
+			{session && <LogoutButton />}
 			<h1 className="mx-auto mb-4 max-w-[760px] text-center text-[40px] font-bold md:text-[60px]">
 				<span className="relative rounded-full text-buttery-yellow hover:bg-[hsl(48_97%_77%/0.1)]">
 					Bueno
@@ -31,7 +32,7 @@ export const Header = async () => {
 				Gestiona tus links de manera rapida, simple, sencilla, amigable, honesta, correcta,
 				apasionada, creible, fiable, responsable y sobre todo divergente
 			</p>
-			{isValidUser ? <AddLinkDialog /> : <LoginButton />}
+			{session ? <AddLinkDialog /> : <LoginButton />}
 		</header>
 	)
 }

@@ -28,6 +28,7 @@ export const SearchBar = () => {
 		>
 			<SearchIcon className="pointer-events-none absolute inset-y-0 left-5 my-auto size-5 text-[hsl(219_8%_60%)]" />
 			<Input
+				type="search"
 				className="block w-full pl-11"
 				placeholder="Ingresa palabra clave"
 				name="phrase"

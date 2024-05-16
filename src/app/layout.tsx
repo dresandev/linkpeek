@@ -2,7 +2,6 @@ import type { Metadata } from "next"
 import { Plus_Jakarta_Sans } from "next/font/google"
 import { LuckyLink } from "~/components/lucky-link"
 import { Toaster } from "~/components/ui/sooner"
-import { AccessDeniedToast } from "~/components/access-denied-toast"
 import "~/styles/globals.css"
 
 const plus_jakarta_sans = Plus_Jakarta_Sans({
@@ -24,10 +23,9 @@ export default function RootLayout({
 	return (
 		<html lang="es">
 			<body className={plus_jakarta_sans.className}>
+				<Toaster />
 				<LuckyLink />
 				{children}
-				<Toaster />
-				<AccessDeniedToast />
 			</body>
 		</html>
 	)

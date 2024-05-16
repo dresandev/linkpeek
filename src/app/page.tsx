@@ -1,8 +1,9 @@
 import { Header } from "~/components/header"
+import { SearchBar } from "~/components/search-bar"
 import { TagList } from "~/components/tag-list"
 import { LinkGrid } from "~/components/link-grid"
 import { Footer } from "~/components/footer"
-import { SearchBar } from "~/components/search-bar"
+import { AccessDeniedToast } from "~/components/access-denied-toast"
 
 interface Props {
 	searchParams: {
@@ -11,8 +12,9 @@ interface Props {
 }
 
 export default function Home({ searchParams }: Props) {
-	const tag = searchParams.tag
-	const phrase = searchParams.phrase
+	const tag = searchParams?.tag
+	const phrase = searchParams?.phrase
+	const errorType = searchParams?.error
 
 	return (
 		<>
@@ -23,6 +25,7 @@ export default function Home({ searchParams }: Props) {
 				<LinkGrid tagFilter={tag} titleFilter={phrase} />
 			</main>
 			<Footer />
+			<AccessDeniedToast errorType={errorType} />
 		</>
 	)
 }

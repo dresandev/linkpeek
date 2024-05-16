@@ -1,10 +1,10 @@
 "use server"
 
-import { chromium } from "playwright"
+import { firefox } from "playwright"
 
 export const getPageMetadata = async (url: string) => {
 	try {
-		const browser = await chromium.launch()
+		const browser = await firefox.launch()
 		const page = await browser.newPage()
 
 		await page.goto(url, { waitUntil: "domcontentloaded", timeout: 5000 })

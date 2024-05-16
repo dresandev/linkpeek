@@ -20,7 +20,7 @@ export const DeleteLinkOption: React.FC<Props> = ({ id, afterDelete }) => {
 			const response = await deleteLink(id)
 
 			if (response?.error) {
-				toast.error(response?.error)
+				toast.error(response.error)
 			} else {
 				router.refresh()
 			}

@@ -22,7 +22,7 @@ export const UpdateLinkForm: React.FC<Props> = ({ link, afterSubmit }) => {
 			const response = await updateLink({ id: link.id, ...formData, tags })
 
 			if (response?.error) {
-				toast.error(response?.error)
+				toast.error(response.error)
 				return
 			}
 

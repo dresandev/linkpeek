@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { toast } from "sonner"
 import { Tag } from "~/types"
 import { createLink } from "~/actions/links"
 import { useOnLinkFormSubmit } from "~/hooks/use-on-link-form-submit"
@@ -16,7 +17,12 @@ interface Props {
 export const AddLinkForm: React.FC<Props> = ({ afterSubmit }) => {
 	const [tags, setTags] = useState<Tag[]>([])
 	const { handleSubmit, isPending } = useOnLinkFormSubmit({
-		action: async (formData) => await createLink({ ...formData, tags }),
+		action: async (formData) => {
+			const response = await createLink({ ...formData, tags })
+			if (response?.error) {
+				toast.error(response.error)
+			}
+		},
 		afterSubmit,
 	})
 

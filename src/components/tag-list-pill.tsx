@@ -13,7 +13,7 @@ export const TagListPill: React.FC<Props> = ({ name, isSelected }) => {
 		<Link
 			href={href}
 			className={cn(
-				"relative cursor-pointer select-none text-nowrap px-5 py-2 text-[14px] font-medium focus-visible:outline-none",
+				"relative min-w-max select-none px-5 py-2 text-[14px] font-medium focus-visible:outline-none",
 				{
 					"text-surface": isSelected,
 					"[&:hover>div]:bg-[hsl(240_4%_39%/0.6)] [&:is(:hover,:focus-visible)>div]:scale-[1.05]":

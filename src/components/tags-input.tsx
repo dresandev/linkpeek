@@ -34,13 +34,26 @@ export const TagsInput: FC<Props> = ({ className, tags, setTags, ...props }) => 
 		setTagValue("")
 	}
 
+	const addSuggestedTag = (idx: number) => {
+		addTag(suggestedTags.at(idx)!.name)
+		setSuggestedTagIdx(null)
+		setSuggestedTags([])
+	}
+
 	const handleKeyDown: KeyboardEventHandler<HTMLInputElement> = (e) => {
-		switch (e.code) {
-			case "Space":
+		switch (e.key) {
+			case " ":
 				if (isTagAdded || !inputValue) {
 					e.preventDefault()
+
+					if (suggestedTagIdx !== null) {
+						addSuggestedTag(suggestedTagIdx)
+						break
+					}
+
 					break
 				}
+
 				addTag(inputValue)
 				break
 
@@ -50,9 +63,7 @@ export const TagsInput: FC<Props> = ({ className, tags, setTags, ...props }) => 
 				e.preventDefault()
 
 				if (suggestedTagIdx !== null) {
-					addTag(suggestedTags.at(suggestedTagIdx)!.name)
-					setSuggestedTagIdx(null)
-					setSuggestedTags([])
+					addSuggestedTag(suggestedTagIdx)
 					break
 				}
 
@@ -72,6 +83,7 @@ export const TagsInput: FC<Props> = ({ className, tags, setTags, ...props }) => 
 					setSuggestedTagIdx(maxSuggestedTagsLength)
 					break
 				}
+
 				if (suggestedTagIdx > 0) {
 					setSuggestedTagIdx(-1)
 					break
@@ -86,6 +98,7 @@ export const TagsInput: FC<Props> = ({ className, tags, setTags, ...props }) => 
 					setSuggestedTagIdx(0)
 					break
 				}
+
 				if (suggestedTagIdx < maxSuggestedTagsLength) {
 					setSuggestedTagIdx(suggestedTagIdx + 1)
 					break

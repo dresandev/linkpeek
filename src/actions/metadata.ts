@@ -4,7 +4,20 @@ import { firefox } from "playwright"
 
 export const getPageMetadata = async (url: string) => {
 	try {
-		const browser = await firefox.launch()
+		const encodedURIComponent = encodeURIComponent(JSON.stringify({
+			browserName: 'Chrome',
+			browserVersion: 'latest',
+			'LT:Options': {
+				platform: 'Windows 10',
+				user: process.env.LT_USERNAME,
+				accessKey: process.env.LT_ACCESS_KEY,
+				build: 'Playwright-LambdaTest-Build',
+				name: 'Playwright-LambdaTest-Session',
+			},
+		}))
+		const wsEndpoint = `wss://cdp.lambdatest.com/playwright?capabilities=${encodedURIComponent}`
+
+		const browser = await firefox.connect(wsEndpoint)
 		const page = await browser.newPage()
 
 		await page.goto(url, { waitUntil: "domcontentloaded", timeout: 5000 })

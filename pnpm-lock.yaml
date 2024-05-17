@@ -9,22 +9,22 @@ importers:
   .:
     dependencies:
       '@auth/prisma-adapter':
-        specifier: ^2.1.0
+        specifier: 2.1.0
         version: 2.1.0(@prisma/client@5.14.0(prisma@5.14.0))
       '@prisma/client':
         specifier: 5.14.0
         version: 5.14.0(prisma@5.14.0)
       '@radix-ui/react-dialog':
-        specifier: ^1.0.5
+        specifier: 1.0.5
         version: 1.0.5(@types/react-dom@18.3.0)(@types/react@18.3.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@radix-ui/react-popover':
-        specifier: ^1.0.7
+        specifier: 1.0.7
         version: 1.0.7(@types/react-dom@18.3.0)(@types/react@18.3.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       class-variance-authority:
-        specifier: ^0.7.0
+        specifier: 0.7.0
         version: 0.7.0
       clsx:
-        specifier: ^2.1.1
+        specifier: 2.1.1
         version: 2.1.1
       next:
         specifier: 14.2.3
@@ -33,59 +33,59 @@ importers:
         specifier: 5.0.0-beta.18
         version: 5.0.0-beta.18(next@14.2.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
       playwright:
-        specifier: ^1.44.0
+        specifier: 1.44.0
         version: 1.44.0
       react:
-        specifier: ^18.3.1
+        specifier: 18.3.1
         version: 18.3.1
       react-dom:
-        specifier: ^18.3.1
+        specifier: 18.3.1
         version: 18.3.1(react@18.3.1)
       sonner:
-        specifier: ^1.4.41
+        specifier: 1.4.41
         version: 1.4.41(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       tw-merge:
         specifier: 0.0.1-alpha.3
         version: 0.0.1-alpha.3
       use-debounce:
-        specifier: ^10.0.0
+        specifier: 10.0.0
         version: 10.0.0(react@18.3.1)
     devDependencies:
       '@types/node':
-        specifier: ^20.12.12
+        specifier: 20.12.12
         version: 20.12.12
       '@types/react':
-        specifier: ^18.3.2
+        specifier: 18.3.2
         version: 18.3.2
       '@types/react-dom':
-        specifier: ^18.3.0
+        specifier: 18.3.0
         version: 18.3.0
       eslint:
-        specifier: ^9.2.0
+        specifier: 9.2.0
         version: 9.2.0
       eslint-config-next:
         specifier: 14.2.3
         version: 14.2.3(eslint@9.2.0)(typescript@5.4.5)
       eslint-config-prettier:
-        specifier: ^9.1.0
+        specifier: 9.1.0
         version: 9.1.0(eslint@9.2.0)
       postcss:
-        specifier: ^8.4.38
+        specifier: 8.4.38
         version: 8.4.38
       prettier:
-        specifier: ^3.2.5
+        specifier: 3.2.5
         version: 3.2.5
       prettier-plugin-tailwindcss:
-        specifier: ^0.5.14
+        specifier: 0.5.14
         version: 0.5.14(prettier@3.2.5)
       prisma:
-        specifier: ^5.14.0
+        specifier: 5.14.0
         version: 5.14.0
       tailwindcss:
-        specifier: ^3.4.3
+        specifier: 3.4.3
         version: 3.4.3
       typescript:
-        specifier: ^5.4.5
+        specifier: 5.4.5
         version: 5.4.5
 
 packages:

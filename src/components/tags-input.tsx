@@ -40,72 +40,71 @@ export const TagsInput: FC<Props> = ({ className, tags, setTags, ...props }) => 
 		setSuggestedTags([])
 	}
 
-	const handleKeyDown: KeyboardEventHandler<HTMLInputElement> = (e) => {
-		switch (e.key) {
-			case " ":
-				if (isTagAdded || !inputValue) {
-					e.preventDefault()
-
-					if (suggestedTagIdx !== null) {
-						addSuggestedTag(suggestedTagIdx)
-						break
-					}
-
-					break
-				}
-
-				addTag(inputValue)
-				break
-
-			case "Enter":
-				if (!inputValue) break
-
+	const keyDownHandledEvents = {
+		" ": (e: React.KeyboardEvent<HTMLInputElement>) => {
+			if (isTagAdded || !inputValue) {
 				e.preventDefault()
 
 				if (suggestedTagIdx !== null) {
-					addSuggestedTag(suggestedTagIdx)
-					break
+					return addSuggestedTag(suggestedTagIdx)
 				}
 
-				addTag(inputValue)
-				break
+				return
+			}
 
-			case "Backspace":
-				if (inputValue || !tags.length) break
-				const filteredTags = tags.slice(0, -1)
-				setTags(filteredTags)
-				break
+			addTag(inputValue)
+		},
+		"Enter": (e: React.KeyboardEvent<HTMLInputElement>) => {
+			if (!inputValue) return
 
-			case "ArrowUp":
-				if (suggestedTags.length) e.preventDefault()
+			e.preventDefault()
 
-				if (suggestedTagIdx === null) {
-					setSuggestedTagIdx(maxSuggestedTagsLength)
-					break
-				}
+			if (suggestedTagIdx !== null) {
+				return addSuggestedTag(suggestedTagIdx)
+			}
 
-				if (suggestedTagIdx > 0) {
-					setSuggestedTagIdx(-1)
-					break
-				}
-				setSuggestedTagIdx(null)
-				break
+			addTag(inputValue)
+		},
+		"Backspace": (e: React.KeyboardEvent<HTMLInputElement>) => {
+			if (inputValue || !tags.length) return
+			const filteredTags = tags.slice(0, -1)
+			setTags(filteredTags)
+		},
+		"ArrowUp": (e: React.KeyboardEvent<HTMLInputElement>) => {
+			if (suggestedTags.length) e.preventDefault()
 
-			case "ArrowDown":
-				if (suggestedTags.length) e.preventDefault()
+			if (suggestedTagIdx === null) {
+				return setSuggestedTagIdx(maxSuggestedTagsLength)
+			}
 
-				if (suggestedTagIdx === null) {
-					setSuggestedTagIdx(0)
-					break
-				}
+			if (suggestedTagIdx > 0) {
+				return setSuggestedTagIdx(-1)
+			}
 
-				if (suggestedTagIdx < maxSuggestedTagsLength) {
-					setSuggestedTagIdx(suggestedTagIdx + 1)
-					break
-				}
-				setSuggestedTagIdx(null)
-				break
-		}
+			setSuggestedTagIdx(null)
+		},
+		"ArrowDown": (e: React.KeyboardEvent<HTMLInputElement>) => {
+			if (suggestedTags.length) e.preventDefault()
+
+			if (suggestedTagIdx === null) {
+				return setSuggestedTagIdx(0)
+			}
+
+			if (suggestedTagIdx < maxSuggestedTagsLength) {
+				return setSuggestedTagIdx(suggestedTagIdx + 1)
+			}
+
+			setSuggestedTagIdx(null)
+		},
+	}
+
+	type KeyDownHandledEventsKeys = keyof typeof keyDownHandledEvents
+
+	const handleKeyDown: KeyboardEventHandler<HTMLInputElement> = (e) => {
+		if (!(e.key in keyDownHandledEvents)) return
+
+		const handler = keyDownHandledEvents[e.key as KeyDownHandledEventsKeys]
+		handler(e)
 	}
 
 	const handleRemoveTag = (idx: number) => {
@@ -134,7 +133,7 @@ export const TagsInput: FC<Props> = ({ className, tags, setTags, ...props }) => 
 			)}
 			onClick={handleFocusInput}
 		>
-			<ul className="flex items-center gap-1">
+			<ul className="flex flex-wrap items-center gap-1">
 				{tags.map((tag, idx) => (
 					<li
 						key={tag.name}

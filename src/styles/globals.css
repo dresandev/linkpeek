@@ -23,10 +23,13 @@
 	scrollbar-width: thin;
 }
 
+html {
+	color-scheme: dark;
+}
+
 body {
 	background-color: var(--surface);
 	color: var(--text);
-	color-scheme: dark;
 }
 
 @layer utilities {

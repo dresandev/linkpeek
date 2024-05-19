@@ -1,17 +1,19 @@
 "use server"
 
-import { db } from '~/lib/db'
+import { db } from "~/lib/db"
 
 export const getTags = async () => {
-  const tags = await db.tag.findMany()
-  return tags
+	const tags = await db.tag.findMany({
+		orderBy: { name: "asc" },
+	})
+	return tags
 }
 
 export const searchTags = async (q: string) => {
-  if (!q) return
+	if (!q) return
 
-  const tags = await db.tag.findMany({
-    where: { name: { startsWith: q } }
-  })
-  return tags
+	const tags = await db.tag.findMany({
+		where: { name: { startsWith: q } },
+	})
+	return tags
 }

@@ -1,16 +1,16 @@
 "use client"
 
 import { useTransition } from "react"
+import { logout } from "~/actions/auth"
 import { Button } from "~/components/ui/button"
 import { LogoutIcon } from "~/components/svg/logout-icon"
-import { signOut } from "next-auth/react"
 
 export const LogoutButton = () => {
 	const [isPending, startTransition] = useTransition()
 
 	const handleOnClick = async () => {
 		startTransition(async () => {
-			await signOut()
+			await logout()
 		})
 	}
 

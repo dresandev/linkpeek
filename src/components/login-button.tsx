@@ -1,7 +1,7 @@
 "use client"
 
 import { useTransition } from "react"
-import { signIn } from "next-auth/react"
+import { socialLogin } from "~/actions/auth"
 import { GitHubLogo } from "~/components/svg"
 
 export const LoginButton = () => {
@@ -9,7 +9,7 @@ export const LoginButton = () => {
 
 	const handleOnClick = () => {
 		startTransition(async () => {
-			await signIn("github", { redirect: false })
+			await socialLogin("github")
 		})
 	}
 

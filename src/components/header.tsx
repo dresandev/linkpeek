@@ -32,8 +32,7 @@ export const Header = async () => {
 				Gestiona tus links de manera rapida, simple, sencilla, amigable, honesta, correcta,
 				apasionada, creible, fiable, responsable y sobre todo divergente
 			</p>
-			{/* {session ? <AddLinkDialog /> : <LoginButton />} */}
-			<AddLinkDialog />
+			{session ? <AddLinkDialog /> : <LoginButton />}
 		</header>
 	)
 }

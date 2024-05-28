@@ -1,7 +1,6 @@
 "use client"
 
 import { useTransition } from "react"
-import { useRouter } from "next/navigation"
 import { deleteLink } from "~/actions/links"
 import { DeleteIcon } from "~/components/svg"
 import { toast } from "sonner"
@@ -12,7 +11,6 @@ interface Props {
 }
 
 export const DeleteLinkOption: React.FC<Props> = ({ id, afterDelete }) => {
-	const router = useRouter()
 	const [isPending, startTransition] = useTransition()
 
 	const handleDelete = async () => {
@@ -21,8 +19,6 @@ export const DeleteLinkOption: React.FC<Props> = ({ id, afterDelete }) => {
 
 			if (response?.error) {
 				toast.error(response.error)
-			} else {
-				router.refresh()
 			}
 
 			afterDelete()

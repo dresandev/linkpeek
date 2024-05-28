@@ -1,12 +1,13 @@
+import type { Filters } from "~/types"
 import { getTags } from "~/actions/tags"
 import { TagListPill } from "~/components/tag-list-pill"
 
 interface Props {
-	tagFilter?: string
-	titleFilter?: string
+	filters: Filters
 }
 
-export const TagList: React.FC<Props> = async ({ tagFilter = "Todo", titleFilter }) => {
+export const TagList: React.FC<Props> = async ({ filters }) => {
+	const { tagFilter = "Todo", titleFilter } = filters
 	const tags = await getTags()
 
 	return (

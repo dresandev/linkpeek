@@ -1,15 +1,14 @@
+import type { Filters } from "~/types"
 import { getLinks } from "~/actions/links"
 import { LinkCard } from "~/components/link-card"
 import { NoItemsIllustration } from "~/components/svg"
 
 interface Props {
-	tagFilter?: string
-	titleFilter?: string
+	filters: Filters
 }
 
-export const LinkGrid: React.FC<Props> = async ({ tagFilter, titleFilter }) => {
-	const filter = titleFilter ? { titleFilter } : { tagFilter }
-	const links = await getLinks(filter)
+export const LinkGrid: React.FC<Props> = async ({ filters }) => {
+	const links = await getLinks({ filters })
 
 	if (!links.length) {
 		return (

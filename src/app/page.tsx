@@ -1,3 +1,4 @@
+import type { Filters } from "~/types"
 import { Header } from "~/components/header"
 import { SearchBar } from "~/components/search-bar"
 import { TagList } from "~/components/tag-list"
@@ -16,13 +17,18 @@ export default function Home({ searchParams }: Props) {
 	const phrase = searchParams?.phrase
 	const errorType = searchParams?.error
 
+	const filters: Filters = {
+		tagFilter: tag,
+		titleFilter: phrase,
+	}
+
 	return (
 		<>
 			<Header />
 			<main className="mx-auto max-w-[1472px] px-5">
 				<SearchBar />
-				<TagList tagFilter={tag} titleFilter={phrase} />
-				<LinkGrid tagFilter={tag} titleFilter={phrase} />
+				<TagList filters={filters} />
+				<LinkGrid filters={filters} />
 			</main>
 			<Footer />
 			<AccessDeniedToast errorType={errorType} />

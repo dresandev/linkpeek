@@ -1,15 +1,17 @@
 "use server"
 
-import type { Link } from "~/types"
+import { revalidatePath } from "next/cache"
+import type { Filters, Link } from "~/types"
 import { db } from "~/lib/db"
 import { auth } from "~/auth"
 
 interface GetLinksOptions {
-	tagFilter?: string
-	titleFilter?: string
+	filters: Filters
 }
 
-export const getLinks = async ({ tagFilter, titleFilter }: GetLinksOptions) => {
+export const getLinks = async ({ filters }: GetLinksOptions) => {
+	const { tagFilter, titleFilter } = filters
+
 	const links = await db.link.findMany({
 		where: {
 			title: {
@@ -17,12 +19,13 @@ export const getLinks = async ({ tagFilter, titleFilter }: GetLinksOptions) => {
 				mode: "insensitive",
 			},
 			tags: {
-				some: { name: { equals: tagFilter } },
+				some: tagFilter ? { name: { equals: tagFilter } } : undefined,
 			},
 		},
 		include: { tags: true },
 		orderBy: { createdAt: "desc" },
 	})
+
 	return links
 }
 
@@ -49,6 +52,8 @@ export const createLink = async (link: Link) => {
 			},
 		},
 	})
+
+	revalidatePath("/")
 }
 
 export const updateLink = async ({ id, tags, ...link }: Link) => {
@@ -75,6 +80,8 @@ export const updateLink = async ({ id, tags, ...link }: Link) => {
 			},
 		},
 	})
+
+	revalidatePath("/")
 }
 
 export const deleteLink = async (id: string) => {
@@ -85,4 +92,6 @@ export const deleteLink = async (id: string) => {
 	}
 
 	await db.link.delete({ where: { id } })
+
+	revalidatePath("/")
 }

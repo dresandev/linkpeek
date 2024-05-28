@@ -19,6 +19,7 @@ export const AddLinkForm: React.FC<Props> = ({ afterSubmit }) => {
 	const { handleSubmit, isPending } = useOnLinkFormSubmit({
 		action: async (formData) => {
 			const response = await createLink({ ...formData, tags })
+
 			if (response?.error) {
 				toast.error(response.error)
 			}

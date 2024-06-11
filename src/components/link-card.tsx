@@ -1,4 +1,4 @@
-import { Link } from "~/types"
+import type { Link } from "~/types"
 import { cn } from "~/lib/utils"
 import { LinkOptionsPopover } from "~/components/link-options-popover"
 
@@ -18,6 +18,7 @@ export const LinkCard: React.FC<Props> = ({ link }) => {
 				)}
 				href={link.url}
 				target="_blank"
+				rel="noopener"
 			>
 				{link.title}
 			</a>
@@ -27,6 +28,8 @@ export const LinkCard: React.FC<Props> = ({ link }) => {
 						className="aspect-video w-full bg-[hsl(0_2%_89%)] object-cover object-center transition-transform duration-300"
 						src={link.ogImageUrl}
 						alt=""
+						loading="lazy"
+						decoding="async"
 						width={358}
 						height={183}
 					/>

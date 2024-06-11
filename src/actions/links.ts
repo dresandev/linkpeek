@@ -12,21 +12,25 @@ interface GetLinksOptions {
 export const getLinks = async ({ filters }: GetLinksOptions) => {
 	const { tagFilter, titleFilter } = filters
 
-	const links = await db.link.findMany({
-		where: {
-			title: {
-				contains: titleFilter,
-				mode: "insensitive",
+	try {
+		const links = await db.link.findMany({
+			where: {
+				title: {
+					contains: titleFilter,
+					mode: "insensitive",
+				},
+				tags: {
+					some: tagFilter ? { name: { equals: tagFilter } } : undefined,
+				},
 			},
-			tags: {
-				some: tagFilter ? { name: { equals: tagFilter } } : undefined,
-			},
-		},
-		include: { tags: true },
-		orderBy: { createdAt: "desc" },
-	})
+			include: { tags: true },
+			orderBy: { createdAt: "desc" },
+		})
 
-	return links
+		return links
+	} catch (error) {
+		return { error: "Error en la base de datos 😥." }
+	}
 }
 
 export const createLink = async (link: Link) => {
@@ -43,17 +47,21 @@ export const createLink = async (link: Link) => {
 	const existingTagNames = existingTags.map((tag) => tag.name)
 	const toCreateTags = link.tags.filter((tag) => !existingTagNames.includes(tag.name))
 
-	await db.link.create({
-		data: {
-			...link,
-			tags: {
-				connect: existingTags,
-				create: toCreateTags,
+	try {
+		await db.link.create({
+			data: {
+				...link,
+				tags: {
+					connect: existingTags,
+					create: toCreateTags,
+				},
 			},
-		},
-	})
+		})
 
-	revalidatePath("/")
+		revalidatePath("/")
+	} catch (error) {
+		return { error: "Error en la base de datos 😥." }
+	}
 }
 
 export const updateLink = async ({ id, tags, ...link }: Link) => {
@@ -70,18 +78,22 @@ export const updateLink = async ({ id, tags, ...link }: Link) => {
 	const existingTagNames = existingTags.map((tag) => tag.name)
 	const toCreateTags = tags.filter((tag) => !existingTagNames.includes(tag.name))
 
-	await db.link.update({
-		where: { id },
-		data: {
-			...link,
-			tags: {
-				set: existingTags,
-				create: toCreateTags,
+	try {
+		await db.link.update({
+			where: { id },
+			data: {
+				...link,
+				tags: {
+					set: existingTags,
+					create: toCreateTags,
+				},
 			},
-		},
-	})
+		})
 
-	revalidatePath("/")
+		revalidatePath("/")
+	} catch (error) {
+		return { error: "Error en la base de datos 😥." }
+	}
 }
 
 export const deleteLink = async (id: string) => {
@@ -91,7 +103,11 @@ export const deleteLink = async (id: string) => {
 		return { error: "No estas autorizado para realizar esta acción." }
 	}
 
-	await db.link.delete({ where: { id } })
+	try {
+		await db.link.delete({ where: { id } })
 
-	revalidatePath("/")
+		revalidatePath("/")
+	} catch (error) {
+		return { error: "Error en la base de datos 😥." }
+	}
 }

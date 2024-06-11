@@ -22,6 +22,7 @@ export const TagListPill: React.FC<Props> = ({ name, isSelected }) => {
 			)}
 			type="button"
 			scroll={false}
+			draggable={false}
 		>
 			<div
 				className={cn("absolute inset-0 -z-10 rounded-lg bg-[hsl(240_4%_39%/0.33)]", {

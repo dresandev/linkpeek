@@ -5,6 +5,7 @@ import type {
 	Dispatch,
 	SetStateAction,
 	FC,
+	KeyboardEvent,
 	KeyboardEventHandler,
 	ChangeEventHandler,
 } from "react"
@@ -17,6 +18,14 @@ import { X } from "~/components/svg"
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
 	tags: Tag[]
 	setTags: Dispatch<SetStateAction<Tag[]>>
+}
+
+interface KeyDownHandledEvents {
+	" ": (e: KeyboardEvent<HTMLInputElement>) => void
+	"Enter": (e: KeyboardEvent<HTMLInputElement>) => void
+	"Backspace": (e: KeyboardEvent<HTMLInputElement>) => void
+	"ArrowUp": (e: KeyboardEvent<HTMLInputElement>) => void
+	"ArrowDown": (e: KeyboardEvent<HTMLInputElement>) => void
 }
 
 export const TagsInput: FC<Props> = ({ className, tags, setTags, ...props }) => {
@@ -40,8 +49,8 @@ export const TagsInput: FC<Props> = ({ className, tags, setTags, ...props }) => 
 		setSuggestedTags([])
 	}
 
-	const keyDownHandledEvents = {
-		" ": (e: React.KeyboardEvent<HTMLInputElement>) => {
+	const keyDownHandledEvents: KeyDownHandledEvents = {
+		" ": (e) => {
 			if (isTagAdded || !inputValue) {
 				e.preventDefault()
 
@@ -54,7 +63,7 @@ export const TagsInput: FC<Props> = ({ className, tags, setTags, ...props }) => 
 
 			addTag(inputValue)
 		},
-		"Enter": (e: React.KeyboardEvent<HTMLInputElement>) => {
+		"Enter": (e) => {
 			if (!inputValue) return
 
 			e.preventDefault()
@@ -65,12 +74,12 @@ export const TagsInput: FC<Props> = ({ className, tags, setTags, ...props }) => 
 
 			addTag(inputValue)
 		},
-		"Backspace": (e: React.KeyboardEvent<HTMLInputElement>) => {
+		"Backspace": (e) => {
 			if (inputValue || !tags.length) return
 			const filteredTags = tags.slice(0, -1)
 			setTags(filteredTags)
 		},
-		"ArrowUp": (e: React.KeyboardEvent<HTMLInputElement>) => {
+		"ArrowUp": (e) => {
 			if (suggestedTags.length) e.preventDefault()
 
 			if (suggestedTagIdx === null) {
@@ -83,7 +92,7 @@ export const TagsInput: FC<Props> = ({ className, tags, setTags, ...props }) => 
 
 			setSuggestedTagIdx(null)
 		},
-		"ArrowDown": (e: React.KeyboardEvent<HTMLInputElement>) => {
+		"ArrowDown": (e) => {
 			if (suggestedTags.length) e.preventDefault()
 
 			if (suggestedTagIdx === null) {
@@ -98,12 +107,10 @@ export const TagsInput: FC<Props> = ({ className, tags, setTags, ...props }) => 
 		},
 	}
 
-	type KeyDownHandledEventsKeys = keyof typeof keyDownHandledEvents
-
 	const handleKeyDown: KeyboardEventHandler<HTMLInputElement> = (e) => {
 		if (!(e.key in keyDownHandledEvents)) return
 
-		const handler = keyDownHandledEvents[e.key as KeyDownHandledEventsKeys]
+		const handler = keyDownHandledEvents[e.key as keyof KeyDownHandledEvents]
 		handler(e)
 	}
 

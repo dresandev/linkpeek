@@ -20,27 +20,26 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
 	setTags: Dispatch<SetStateAction<Tag[]>>
 }
 
-interface KeyDownHandledEvents {
-	" ": (e: KeyboardEvent<HTMLInputElement>) => void
-	"Enter": (e: KeyboardEvent<HTMLInputElement>) => void
-	"Backspace": (e: KeyboardEvent<HTMLInputElement>) => void
-	"ArrowUp": (e: KeyboardEvent<HTMLInputElement>) => void
-	"ArrowDown": (e: KeyboardEvent<HTMLInputElement>) => void
+type HandledEvent = " " | "Enter" | "Backspace" | "ArrowUp" | "ArrowDown"
+
+type KeyDownHandledEvent = {
+	[key in HandledEvent]: (e: KeyboardEvent<HTMLInputElement>) => void
 }
 
 export const TagsInput: FC<Props> = ({ className, tags, setTags, ...props }) => {
-	const [inputValue, setTagValue] = useState("")
+	const [inputValue, setInputValue] = useState("")
 	const [suggestedTags, setSuggestedTags] = useState<Tag[]>([])
 	const [suggestedTagIdx, setSuggestedTagIdx] = useState<number | null>(null)
 	const inputRef = useRef<HTMLInputElement>(null)
-
-	const isTagAdded = tags.some((tag) => tag.name === inputValue)
 	const maxSuggestedTagsLength = suggestedTags.length - 1
 
 	const addTag = (tagName: string) => {
-		if (!tagName || isTagAdded) return
+		const isTagAdded = tags.some((tag) => tag.name === tagName)
+
+		if (isTagAdded) return
+
 		setTags([...tags, { name: tagName }])
-		setTagValue("")
+		setInputValue("")
 	}
 
 	const addSuggestedTag = (idx: number) => {
@@ -49,9 +48,9 @@ export const TagsInput: FC<Props> = ({ className, tags, setTags, ...props }) => 
 		setSuggestedTags([])
 	}
 
-	const keyDownHandledEvents: KeyDownHandledEvents = {
+	const keyDownHandledEvents: KeyDownHandledEvent = {
 		" ": (e) => {
-			if (isTagAdded || !inputValue) {
+			if (!inputValue) {
 				e.preventDefault()
 
 				if (suggestedTagIdx !== null) {
@@ -87,7 +86,7 @@ export const TagsInput: FC<Props> = ({ className, tags, setTags, ...props }) => 
 			}
 
 			if (suggestedTagIdx > 0) {
-				return setSuggestedTagIdx(-1)
+				return setSuggestedTagIdx(suggestedTagIdx - 1)
 			}
 
 			setSuggestedTagIdx(null)
@@ -110,7 +109,7 @@ export const TagsInput: FC<Props> = ({ className, tags, setTags, ...props }) => 
 	const handleKeyDown: KeyboardEventHandler<HTMLInputElement> = (e) => {
 		if (!(e.key in keyDownHandledEvents)) return
 
-		const handler = keyDownHandledEvents[e.key as keyof KeyDownHandledEvents]
+		const handler = keyDownHandledEvents[e.key as keyof KeyDownHandledEvent]
 		handler(e)
 	}
 
@@ -124,7 +123,7 @@ export const TagsInput: FC<Props> = ({ className, tags, setTags, ...props }) => 
 	}
 
 	const handleOnChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-		setTagValue(e.currentTarget.value.trim().toLowerCase())
+		setInputValue(e.currentTarget.value.trim().toLowerCase())
 	}
 
 	const handleOnSelect = (tag: Tag) => {

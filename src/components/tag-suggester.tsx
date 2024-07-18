@@ -37,18 +37,6 @@ export const TagSuggester: FC<Props> = ({
 		getTags()
 	}, [debouncedSearchTerm, setSuggestedTags])
 
-	useEffect(() => {
-		if (!listboxRef.current) return
-
-		Array.from(listboxRef.current.children).forEach((tagElement, currentIdx) => {
-			tagElement.setAttribute("aria-selected", "false")
-
-			if (suggestedTagIdx === currentIdx) {
-				tagElement.setAttribute("aria-selected", "true")
-			}
-		})
-	}, [suggestedTagIdx])
-
 	const handleOnClick: MouseEventHandler<HTMLLIElement> = (e) => {
 		const idx = Number(e.currentTarget.dataset.idx)
 		onSelect(suggestedTags[idx])
@@ -67,7 +55,7 @@ export const TagSuggester: FC<Props> = ({
 			{suggestedTags.map((tag, idx) => (
 				<li
 					role="option"
-					aria-selected={false}
+					aria-selected={suggestedTagIdx === idx}
 					data-idx={idx}
 					key={tag.id}
 					className="bg-secondary-surface px-4 py-1 font-semibold hover:bg-text hover:text-surface aria-selected:bg-text aria-selected:text-surface"

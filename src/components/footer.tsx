@@ -4,7 +4,7 @@ export const Footer = () => {
 			Desarrollado por{" "}
 			<a
 				className="font-semibold text-light-sky-blue"
-				href="https://dresan.is-a.dev"
+				href="https://dresan.dev"
 				target="_blank"
 			>
 				Dresan

@@ -33,6 +33,7 @@ export const DialogContent = forwardRef<
 		<DialogOverlay />
 		<DialogPrimitive.Content
 			ref={ref}
+			aria-describedby=""
 			className={cn(
 				"fixed inset-0 m-auto h-max max-h-[85vh] w-[90vw] max-w-[450px] overflow-y-auto rounded-[6px] bg-secondary-surface p-[25px] focus:outline-none data-[state=closed]:animate-hide-dialog data-[state=open]:animate-enter-dialog",
 				className

@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Link } from "~/types"
+import type { Link } from "~/types"
 import { DotsVertical } from "~/components/svg"
 import { UpdateLinkDialog } from "~/components/dialogs/update-link-dialog"
 import { Popover, PopoverContent, PopoverTrigger } from "~/components/ui/popover"

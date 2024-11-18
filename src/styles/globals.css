@@ -19,10 +19,6 @@
 	color: var(--surface);
 }
 
-* {
-	scrollbar-width: thin;
-}
-
 html {
 	color-scheme: dark;
 }

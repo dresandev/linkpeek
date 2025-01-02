@@ -4,4 +4,4 @@ I am a compulsive link collector 🥴, I normally store them in the mobile brows
 
 ## Preview
 
-![personal-link-manager](https://github.com/dresandev/personal-link-manager/assets/79766563/dd4482ec-e705-4169-9ac1-50ef5c55049a)
+![image](https://github.com/user-attachments/assets/0ff62e9f-4b20-45ba-b6f5-f7d365652441)

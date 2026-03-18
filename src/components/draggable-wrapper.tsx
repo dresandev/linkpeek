@@ -8,7 +8,7 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
 }
 
 export const DraggableWrapper: React.FC<Props> = ({ children, ...delegated }) => {
-	const ref = useRef<HTMLDivElement>() as React.MutableRefObject<HTMLInputElement>
+	const ref = useRef<HTMLDivElement>(null) as React.RefObject<HTMLDivElement>
 	const { events } = useDraggable(ref)
 
 	return (

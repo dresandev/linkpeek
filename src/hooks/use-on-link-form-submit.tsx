@@ -1,7 +1,7 @@
 import { useTransition } from "react"
 import { toast } from "sonner"
-import type { Link } from "~/types"
-import { getPageMetadata } from "~/actions/metadata"
+import type { Link } from "@/types"
+import { getPageMetadata } from "@/actions/metadata"
 
 interface Props {
 	action: (formData: Omit<Link, "tags">) => Promise<void>

@@ -1,10 +1,10 @@
 "use client"
 
 import { useState } from "react"
-import { Link } from "~/types"
-import { PencilIcon } from "~/components/svg"
-import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "~/components/ui/dialog"
-import { UpdateLinkForm } from "~/components/forms/update-link-form"
+import { Link } from "@/types"
+import { PencilIcon } from "@/components/svg"
+import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
+import { UpdateLinkForm } from "@/components/forms/update-link-form"
 
 interface Props {
 	link: Link

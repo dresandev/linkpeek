@@ -1,21 +1,17 @@
-import type { Filters } from "~/types"
-import { Header } from "~/components/header"
-import { SearchBar } from "~/components/search-bar"
-import { TagList } from "~/components/tag-list"
-import { LinkGrid } from "~/components/link-grid"
-import { Footer } from "~/components/footer"
-import { AccessDeniedToast } from "~/components/access-denied-toast"
+import type { Filters } from "@/types"
+import { Header } from "@/components/header"
+import { SearchBar } from "@/components/search-bar"
+import { TagList } from "@/components/tag-list"
+import { LinkGrid } from "@/components/link-grid"
+import { Footer } from "@/components/footer"
+import { AccessDeniedToast } from "@/components/access-denied-toast"
 
 interface Props {
-	searchParams: {
-		[key: string]: string | undefined
-	}
+	searchParams: Promise<{ [key: string]: string | undefined }>
 }
 
-export default function Home({ searchParams }: Props) {
-	const tag = searchParams?.tag
-	const phrase = searchParams?.phrase
-	const errorType = searchParams?.error
+export default async function Home({ searchParams }: Props) {
+	const { tag, phrase, error: errorType } = await searchParams
 
 	const filters: Filters = {
 		tagFilter: tag,
@@ -25,7 +21,7 @@ export default function Home({ searchParams }: Props) {
 	return (
 		<>
 			<Header />
-			<main className="mx-auto max-w-[1472px] px-5">
+			<main className="mx-auto max-w-368 px-5">
 				<SearchBar />
 				<TagList filters={filters} />
 				<LinkGrid filters={filters} />

@@ -1,9 +1,9 @@
 import type { FC, MouseEventHandler, Dispatch, SetStateAction } from "react"
 import { useEffect, useRef } from "react"
 import { useDebounce } from "use-debounce"
-import type { Tag } from "~/types"
-import { searchTags } from "~/actions/tags"
-import { cn } from "~/lib/utils"
+import type { Tag } from "@/types"
+import { searchTags } from "@/actions/tags"
+import { cn } from "@/lib/utils"
 
 interface Props {
 	searchTerm: string

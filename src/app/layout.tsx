@@ -1,18 +1,18 @@
 import type { Metadata } from "next"
 import { Plus_Jakarta_Sans } from "next/font/google"
-import { LuckyLink } from "~/components/lucky-link"
-import { Toaster } from "~/components/ui/sooner"
-import "~/styles/globals.css"
+import { LuckyLink } from "@/components/lucky-link"
+import { Toaster } from "@/components/ui/sooner"
+import "@/styles/globals.css"
 
-const plus_jakarta_sans = Plus_Jakarta_Sans({
+const plusJakartaSans = Plus_Jakarta_Sans({
 	subsets: ["latin"],
 	weight: ["400", "500", "600", "700"],
 })
 
 export const metadata: Metadata = {
 	title: "Dresan - links personales",
-	description: "App personal para gestionar tus links ",
-	authors: [{ name: "Dresan", url: "dresan.is-a.dev" }],
+	description: "Links personales de Dresan, desarrollador web y entusiasta de la tecnología.",
+	authors: [{ name: "Dresan", url: "dresan.dev" }],
 }
 
 export default function RootLayout({
@@ -22,7 +22,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="es">
-			<body className={plus_jakarta_sans.className}>
+			<body className={plusJakartaSans.className}>
 				<Toaster />
 				<LuckyLink />
 				{children}

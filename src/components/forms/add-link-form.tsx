@@ -2,13 +2,13 @@
 
 import { useState } from "react"
 import { toast } from "sonner"
-import { Tag } from "~/types"
-import { createLink } from "~/actions/links"
-import { useOnLinkFormSubmit } from "~/hooks/use-on-link-form-submit"
-import { Input } from "~/components/ui/input"
-import { Button } from "~/components/ui/button"
-import { CircleLoader } from "~/components/loaders/circle-loader"
-import { TagsInput } from "~/components/tags-input"
+import { Tag } from "@/types"
+import { createLink } from "@/actions/links"
+import { useOnLinkFormSubmit } from "@/hooks/use-on-link-form-submit"
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
+import { CircleLoader } from "@/components/loaders/circle-loader"
+import { TagsInput } from "@/components/tags-input"
 
 interface Props {
 	afterSubmit: () => void

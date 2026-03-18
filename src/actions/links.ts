@@ -1,9 +1,9 @@
 "use server"
 
 import { revalidatePath } from "next/cache"
-import type { Filters, Link } from "~/types"
-import { db } from "~/lib/db"
-import { auth } from "~/auth"
+import type { Filters, Link } from "@/types"
+import { db } from "@/lib/db"
+import { auth } from "@/auth"
 
 interface GetLinksOptions {
 	filters: Filters

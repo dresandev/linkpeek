@@ -1,9 +1,9 @@
 "use client"
 
 import { useState } from "react"
-import { Button } from "~/components/ui/button"
-import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "~/components/ui/dialog"
-import { AddLinkForm } from "~/components/forms/add-link-form"
+import { Button } from "@/components/ui/button"
+import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
+import { AddLinkForm } from "@/components/forms/add-link-form"
 
 export const AddLinkDialog = () => {
 	const [open, setOpen] = useState(false)

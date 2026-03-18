@@ -28,10 +28,10 @@ export const getPageMetadata = async (url: string) => {
 		const { ogImage, description } = await page.evaluate(() => {
 			const ogImage =
 				document
-					.querySelector('meta[name="og:image"], meta[property="og:image"]')
+					.querySelector("meta[name=\"og:image\"], meta[property=\"og:image\"]")
 					?.getAttribute("content") ?? null
 			const description =
-				document.querySelector('meta[name="description"]')?.getAttribute("content") ?? null
+				document.querySelector("meta[name=\"description\"]")?.getAttribute("content") ?? null
 
 			return {
 				ogImage,

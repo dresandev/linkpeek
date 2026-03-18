@@ -10,10 +10,10 @@ import type {
 	ChangeEventHandler,
 } from "react"
 import { useRef, useState } from "react"
-import type { Tag } from "~/types"
-import { cn } from "~/lib/utils"
-import { TagSuggester } from "~/components/tag-suggester"
-import { X } from "~/components/svg"
+import type { Tag } from "@/types"
+import { cn } from "@/lib/utils"
+import { TagSuggester } from "@/components/tag-suggester"
+import { X } from "@/components/svg"
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
 	tags: Tag[]

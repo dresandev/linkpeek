@@ -1,9 +1,9 @@
 "use client"
 
 import { useTransition } from "react"
-import { logout } from "~/actions/auth"
-import { Button } from "~/components/ui/button"
-import { LogoutIcon } from "~/components/svg/logout-icon"
+import { logout } from "@/actions/auth"
+import { Button } from "@/components/ui/button"
+import { LogoutIcon } from "@/components/svg/logout-icon"
 
 export const LogoutButton = () => {
 	const [isPending, startTransition] = useTransition()

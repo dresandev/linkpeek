@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { cn } from "~/lib/utils"
+import { cn } from "@/lib/utils"
 
 interface Props {
 	name: string
@@ -27,7 +27,7 @@ export const TagListPill: React.FC<Props> = ({ name, isSelected }) => {
 			<div
 				className={cn("absolute inset-0 -z-10 rounded-lg bg-[hsl(240_4%_39%/0.33)]", {
 					"bg-white": isSelected,
-					"scale-[0.95] transition-[transform,background-color] duration-150": !isSelected,
+					"scale-[0.95] transition-transform duration-150": !isSelected,
 				})}
 			></div>
 			{name}

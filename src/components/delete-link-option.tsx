@@ -1,9 +1,9 @@
 "use client"
 
 import { useTransition } from "react"
-import { deleteLink } from "~/actions/links"
-import { DeleteIcon } from "~/components/svg"
 import { toast } from "sonner"
+import { deleteLink } from "@/actions/links"
+import { DeleteIcon } from "@/components/svg"
 
 interface Props {
 	id: string

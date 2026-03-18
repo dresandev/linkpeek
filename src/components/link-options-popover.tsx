@@ -1,11 +1,11 @@
 "use client"
 
 import { useState } from "react"
-import type { Link } from "~/types"
-import { DotsVertical } from "~/components/svg"
-import { UpdateLinkDialog } from "~/components/dialogs/update-link-dialog"
-import { Popover, PopoverContent, PopoverTrigger } from "~/components/ui/popover"
-import { DeleteLinkOption } from "~/components/delete-link-option"
+import type { Link } from "@/types"
+import { DotsVertical } from "@/components/svg"
+import { UpdateLinkDialog } from "@/components/dialogs/update-link-dialog"
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
+import { DeleteLinkOption } from "@/components/delete-link-option"
 
 interface Props {
 	link: Link

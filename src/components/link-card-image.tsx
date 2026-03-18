@@ -1,9 +1,14 @@
 "use client"
 
 import { useState } from "react"
-import Image, { type ImageProps } from "next/image"
+import { type ImageProps } from "next/image"
 
-interface Props extends ImageProps { }
+interface Props {
+  className?: string
+  src?: string
+  loading: ImageProps["loading"]
+  decoding: ImageProps["decoding"]
+}
 
 export const LinkCardImage: React.FC<Props> = (props) => {
   const [hasError, setHasError] = useState(false)
@@ -16,10 +21,12 @@ export const LinkCardImage: React.FC<Props> = (props) => {
 
   return (
     <picture className="block overflow-hidden" >
-      <Image
+      <img
         {...props}
+        width={358}
+        height={183}
+        alt=""
         onError={() => setHasError(true)}
-        unoptimized
       />
     </picture>
   )

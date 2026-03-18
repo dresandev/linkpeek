@@ -1,8 +1,8 @@
 "use client"
 
 import { useTransition } from "react"
-import { socialLogin } from "~/actions/auth"
-import { GitHubLogo } from "~/components/svg"
+import { socialLogin } from "@/actions/auth"
+import { GitHubLogo } from "@/components/svg"
 
 export const LoginButton = () => {
 	const [isPending, startTransition] = useTransition()

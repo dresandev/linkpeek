@@ -1,9 +1,8 @@
 "use server"
 
-import type { BuiltInProviderType } from "next-auth/providers"
-import type { LiteralUnion } from "next-auth/react"
-import { signIn } from "~/auth"
-import { signOut } from "~/auth"
+import type { ProviderId } from "next-auth/providers"
+import { signIn } from "@/auth"
+import { signOut } from "@/auth"
 
 interface AuthOptions {
 	redirectTo?: string
@@ -11,7 +10,7 @@ interface AuthOptions {
 }
 
 export const socialLogin = async (
-	provider?: LiteralUnion<BuiltInProviderType>,
+	provider?: ProviderId,
 	options?: AuthOptions
 ) => {
 	await signIn(provider, options)

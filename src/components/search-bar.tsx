@@ -1,8 +1,8 @@
 "use client"
 
 import { useRouter, useSearchParams } from "next/navigation"
-import { SearchIcon } from "~/components/svg"
-import { Input } from "~/components/ui/input"
+import { SearchIcon } from "@/components/svg"
+import { Input } from "@/components/ui/input"
 
 export const SearchBar = () => {
 	const router = useRouter()

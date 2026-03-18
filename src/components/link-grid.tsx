@@ -1,7 +1,7 @@
-import type { Filters } from "~/types"
-import { getLinks } from "~/actions/links"
-import { LinkCard } from "~/components/link-card"
-import { NoItemsIllustration } from "~/components/svg"
+import type { Filters } from "@/types"
+import { getLinks } from "@/actions/links"
+import { LinkCard } from "@/components/link-card"
+import { NoItemsIllustration } from "@/components/svg"
 
 interface Props {
 	filters: Filters
